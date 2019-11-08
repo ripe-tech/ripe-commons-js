@@ -6,10 +6,15 @@ export const getRipeAuth = async req => {
     // an authorization information already present in it
     if (req.ripeAuth) return req.ripeAuth;
 
+    // allocates space for the access token value that is going
+    // to be "gathered" from all possible request sources
     let accessToken = null;
 
+    // tries to "find" the token in the GET parameters
     if (req.params.token) accessToken = req.params.token;
 
+    // tries to verify if the authorization header is present and
+    // if that's the case unpacks the token from it
     if (req.headers.authorization) {
         [, accessToken] = req.headers.authorization.split(" ", 2);
     }
