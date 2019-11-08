@@ -1,4 +1,4 @@
-# RIPE Commons JS
+# RIPE Commons Javascript
 
 Set of shared Javascript infrastructure for RIPE.
 
