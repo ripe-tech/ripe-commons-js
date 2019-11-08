@@ -7,7 +7,6 @@ export const getRipeAuth = async req => {
     if (req.ripeAuth) return req.ripeAuth;
 
     let accessToken = null;
-    const api = new API();
 
     if (req.params.token) accessToken = req.params.token;
 
@@ -20,6 +19,10 @@ export const getRipeAuth = async req => {
     if (!accessToken) {
         throw new OperationalError("No access token provided", 401);
     }
+
+    // creates a new instance of the RIPE ID API client to be used for
+    // the "redeem" operation of the access token
+    const api = new API();
 
     // tries to redeem the token and then reacts to the most usual problems
     // in the expected manner
