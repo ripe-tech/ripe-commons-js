@@ -8,13 +8,13 @@ import pkg from "./package.json";
 const fsbuiltin = function() {
     return {
         name: "fs",
-        resolveId(importee) {
+        resolveId: function(importee) {
             if (importee === "fs") {
                 return importee;
             }
             return null;
         },
-        load(id) {
+        load: function(id) {
             if (id === "fs") {
                 return "export const promises = {};";
             }

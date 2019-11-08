@@ -34,9 +34,9 @@
     "scripts": {
         "build": "rollup -c",
         "example": "node examples/simple.js",
-        "lint": "eslint \"./{js,test}/**/*.{js,json}\"",
-        "lint-fix": "eslint \"./{js,test}/**/*.{js,json}\" --fix",
-        "prettier": "prettier \"./*.{js,json}\" \"./{js,test}/**/*.{js,json}\" --write",
+        "lint": "eslint rollup.config.js \"./{js,test}/**/*.{js,json}\"",
+        "lint-fix": "eslint rollup.config.js \"./{js,test}/**/*.{js,json}\" --fix",
+        "prettier": "prettier rollup.config.js \"./*.{js,json}\" \"./{js,test}/**/*.{js,json}\" --write",
         "pretty": "npm run prettier && npm run lint-fix",
         "test": "mocha --recursive",
         "upgrade": "npx sort-package-json && ncu -u",
