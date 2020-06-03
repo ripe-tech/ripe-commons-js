@@ -43,8 +43,8 @@
         "watch": "rollup -c -w"
     },
     "dependencies": {
-        "ripe-id-api": "^0.2.1",
-        "yonius": "^0.4.0"
+        "ripe-id-api": "^0.2.2",
+        "yonius": "^0.4.2"
     },
     "devDependencies": {
         "@babel/core": "^7.10.2",

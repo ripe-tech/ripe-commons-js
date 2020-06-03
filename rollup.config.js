@@ -4,23 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import nodePolyfills from "rollup-plugin-node-polyfills";
 import pkg from "./package.json";
 
-const fsbuiltin = function() {
-    return {
-        name: "fs",
-        resolveId: function(importee) {
-            if (importee === "fs") {
-                return importee;
-            }
-            return null;
-        },
-        load: function(id) {
-            if (id === "fs") {
-                return "export const promises = {};";
-            }
-            return null;
-        }
-    };
-};
+import { yoniusRollup } from "yonius";
 
 const nodePath = process.env.NODE_PATH
     ? process.platform === "win32"
@@ -53,7 +37,7 @@ export default [
             }
         },
         plugins: [
-            fsbuiltin(),
+            yoniusRollup(),
             nodePolyfills(),
             resolve({
                 customResolveOptions: {
