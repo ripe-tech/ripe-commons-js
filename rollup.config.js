@@ -1,8 +1,7 @@
-import babel from "rollup-plugin-babel";
-import resolve from "rollup-plugin-node-resolve";
-import commonjs from "rollup-plugin-commonjs";
-import globals from "rollup-plugin-node-globals";
-import builtins from "rollup-plugin-node-builtins";
+import babel from "@rollup/plugin-babel";
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import nodePolyfills from "rollup-plugin-node-polyfills";
 import pkg from "./package.json";
 
 const fsbuiltin = function() {
@@ -54,9 +53,8 @@ export default [
             }
         },
         plugins: [
-            globals(),
             fsbuiltin(),
-            builtins(),
+            nodePolyfills(),
             resolve({
                 customResolveOptions: {
                     paths: nodePath
@@ -65,6 +63,7 @@ export default [
             commonjs(),
             babel({
                 babelrc: false,
+                babelHelpers: "bundled",
                 presets: ["@babel/preset-env"]
             })
         ]
