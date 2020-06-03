@@ -24,7 +24,6 @@ const banner =
 export default [
     {
         input: "js/index.js",
-        external: ["node-fetch"],
         output: {
             name: "ripeCommons",
             file: pkg.browser,
