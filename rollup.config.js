@@ -30,10 +30,7 @@ export default [
             banner: banner,
             format: "umd",
             exports: "named",
-            sourcemap: true,
-            globals: {
-                "node-fetch": "fetch"
-            }
+            sourcemap: true
         },
         plugins: [
             yoniusRollup(),
