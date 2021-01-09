@@ -10,8 +10,11 @@ export const getRipeAuth = async req => {
     // to be "gathered" from all possible request sources
     let accessToken = null;
 
-    // tries to "find" the token in the GET parameters
+    // tries to "find" the token in the route parameters
     if (req.params.token) accessToken = req.params.token;
+
+    // tries to "find" the token in the GET parameters
+    if (req.query.token) accessToken = req.query.token;
 
     // tries to verify if the authorization header is present and
     // if that's the case unpacks the token from it
