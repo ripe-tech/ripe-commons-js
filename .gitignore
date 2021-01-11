@@ -1,5 +1,6 @@
 .DS_Store
 
+yarn.lock
 example.env
 package-lock.json
 

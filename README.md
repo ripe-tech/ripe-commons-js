@@ -1,6 +1,6 @@
 # RIPE Commons Javascript
 
-Set of shared Javascript infrastructure for RIPE.
+Set of shared Javascript infrastructure for RIPE context applications.
 
 ## License
 
