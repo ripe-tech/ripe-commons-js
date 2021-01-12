@@ -77,7 +77,7 @@ export default [
     },
     {
         input: "types/index.d.ts",
-        output: [{ file: "dist/yonius.d.ts", format: "es" }],
+        output: [{ file: "dist/ripe-commons.d.ts", format: "es" }],
         plugins: [dts()]
     }
 ];
