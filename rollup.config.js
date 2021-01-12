@@ -2,6 +2,7 @@ import babel from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import nodePolyfills from "rollup-plugin-node-polyfills";
+import dts from "rollup-plugin-dts";
 import pkg from "./package.json";
 
 import { yoniusRollup } from "yonius";
@@ -73,5 +74,10 @@ export default [
                 }
             })
         ]
+    },
+    {
+        input: "types/index.d.ts",
+        output: [{ file: "dist/yonius.d.ts", format: "es" }],
+        plugins: [dts()]
     }
 ];
