@@ -7,7 +7,7 @@ describe("Handlers", function() {
     describe("#errorHandlerFastify", function() {
         it("should be able to update the error with the given status code and error message", async () => {
             let errorResult = {};
-            const replyMock = {
+            const res = {
                 code: statusNumber => {
                     errorResult = { statusCode: statusNumber };
                     return {
@@ -26,7 +26,7 @@ describe("Handlers", function() {
                     stack: "Error\nError"
                 },
                 {},
-                replyMock
+                res
             );
             assert.strictEqual(errorResult.statusCode, 500);
             assert.strictEqual(errorResult.code, 500);
@@ -40,7 +40,7 @@ describe("Handlers", function() {
                     message: "Error 404"
                 },
                 {},
-                replyMock
+                res
             );
             assert.strictEqual(errorResult.statusCode, 404);
             assert.strictEqual(errorResult.code, 404);
@@ -50,7 +50,7 @@ describe("Handlers", function() {
 
         it("should not populate the stack trace field in production environment", async () => {
             let errorResult = {};
-            const replyMock = {
+            const res = {
                 code: statusNumber => {
                     errorResult = { statusCode: statusNumber };
                     return {
@@ -70,7 +70,7 @@ describe("Handlers", function() {
                     stack: "Error\nError"
                 },
                 {},
-                replyMock
+                res
             );
             assert.strictEqual(errorResult.statusCode, 500);
             assert.strictEqual(errorResult.code, 500);
