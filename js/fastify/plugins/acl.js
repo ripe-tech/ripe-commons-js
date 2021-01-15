@@ -1,4 +1,3 @@
-
 import fp from "fastify-plugin";
 
 import { getRipeAuth } from "../../auth";
