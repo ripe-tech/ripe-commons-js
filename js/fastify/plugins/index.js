@@ -1,1 +1,1 @@
-export * from "./get-acl";
+export * from "./acl";

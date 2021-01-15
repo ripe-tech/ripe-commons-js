@@ -68,6 +68,7 @@ export default [
             }
         ],
         plugins: [
+            commonjs(),
             resolve({
                 customResolveOptions: {
                     paths: nodePath
