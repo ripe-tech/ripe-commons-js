@@ -7,10 +7,13 @@ import {
     RawReplyDefaultExpression
 } from "fastify";
 
-export declare function getAcl<
-    Options extends FastifyPluginOptions = Record<never, never>,
-    Server extends RawServerBase = RawServerDefault
->(
+type Options = FastifyPluginOptions & {
+    skipAuth?: boolean;
+    skipUser?: string;
+    skipAcl?: string[];
+};
+
+export declare function ripeAcl<Server extends RawServerBase = RawServerDefault>(
     instance: FastifyInstance<
         Server,
         RawRequestDefaultExpression<Server>,
