@@ -5,7 +5,7 @@ import { getRipeAuth } from "../../auth";
 const acl = async (app, options) => {
     app.addHook("onRequest", (req, res, next) => {
         req.getAcl = async ctx => {
-            req.ripeCtx = {};
+            req.ripeCtx = req.ripeCtx === undefined ? {} : req.ripeCtx;
             if (options.skipAuth) {
                 req.ripeCtx.user = options.skipUser || "anonymous";
                 return options.skipAcl || ["*"];
