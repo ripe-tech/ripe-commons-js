@@ -27,7 +27,7 @@ export type RipeAccount = {
     facebook_id?: string;
     live_id?: string;
     type?: number;
-    id: number;
+    id?: number;
 };
 /* eslint-enable camelcase */
 
