@@ -11,6 +11,7 @@ export type RipeAccount = {
     avatar_url?: string;
     twitter_username?: string;
     meta?: {
+        brand_t?: string | string[];
         phone_number?: string;
         linkedin_username?: string;
         name?: string;
@@ -21,6 +22,7 @@ export type RipeAccount = {
         birth_date?: string;
         position?: string;
         nationality?: string;
+        [x: string]: unknown;
     };
     last_login?: number;
     roles?: number[];
