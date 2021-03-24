@@ -4,7 +4,8 @@ import {
     RawRequestDefaultExpression,
     RawServerBase,
     RawServerDefault,
-    RawReplyDefaultExpression
+    RawReplyDefaultExpression,
+    FastifyRequest
 } from "fastify";
 
 type Options = FastifyPluginOptions & {
@@ -12,6 +13,14 @@ type Options = FastifyPluginOptions & {
     skipUser?: string;
     skipAcl?: string[];
 };
+
+export declare function acl(
+    options?: Options
+): (
+    req: FastifyRequest,
+    res: FastifyReply,
+    next: HookHandlerDoneFunction
+) => preValidationHookHandler | void;
 
 export declare function ripeAcl<Server extends RawServerBase = RawServerDefault>(
     instance: FastifyInstance<

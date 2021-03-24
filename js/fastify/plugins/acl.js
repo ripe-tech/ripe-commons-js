@@ -2,11 +2,7 @@ import fp from "fastify-plugin";
 
 import { getRipeAuth } from "../../auth";
 
-const aclPlugin = async (app, options) => {
-    app.addHook("onRequest", acl);
-};
-
-const acl = (req, res, next) => {
+export const acl = (options = {}) => (req, res, next) => {
     req.getAcl = async ctx => {
         req.ripeCtx = req.ripeCtx === undefined ? {} : req.ripeCtx;
         if (options.skipAuth) {
@@ -19,6 +15,10 @@ const acl = (req, res, next) => {
     };
 
     next();
+};
+
+const aclPlugin = async (app, options) => {
+    app.addHook("onRequest", acl(options));
 };
 
 export const ripeAcl = fp(aclPlugin);
