@@ -5,7 +5,10 @@ import {
     RawServerBase,
     RawServerDefault,
     RawReplyDefaultExpression,
-    FastifyRequest
+    FastifyRequest,
+    FastifyReply,
+    HookHandlerDoneFunction,
+    preValidationHookHandler
 } from "fastify";
 
 type Options = FastifyPluginOptions & {
