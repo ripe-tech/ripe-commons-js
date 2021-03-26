@@ -44,7 +44,7 @@
         "test": "mocha --recursive",
         "upgrade": "npx sort-package-json && ncu -u",
         "watch": "rollup -c -w",    
-        "prepare": "npm run build"
+        "prepack": "npm run build"
     },
     "dependencies": {
         "fastify-plugin": "^3.0.0",
