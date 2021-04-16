@@ -10,7 +10,7 @@
  * @returns {String} The patched URL with a series of values
  * replaced with proper value.
  */
- export const patchBaseUrl = url => {
+export const patchBaseUrl = url => {
     const hasProtocol = url.startsWith("http://") || url.startsWith("https://");
     if (hasProtocol) return url;
     const isVercel = url.endsWith(".vercel.app");
