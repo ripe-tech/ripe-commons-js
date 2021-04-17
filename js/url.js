@@ -5,6 +5,9 @@
  * A series of heuristics are used in this patch operation
  * to make it as "standard" as possible.
  *
+ * Operations that are applied to the URL: prefix application
+ * and vercel ignoring.
+ *
  * @param {String} url The URL to be patched with a series
  * of pre-defined heuristics.
  * @returns {String} The patched URL with a series of values
