@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *
 
+## [0.3.5] - 2021-04-17
+
+### Added
+
+* `patchBaseUrl` to allow fixing non canonical base URL values
+
 ## [0.3.4] - 2021-04-01
 
 ### Added
