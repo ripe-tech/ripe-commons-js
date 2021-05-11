@@ -36,12 +36,12 @@ export const getReqToken = req => {
     // if that's the case unpacks the token from it
     if (req.headers.authorization) {
         const [, accessToken] = req.headers.authorization.split(" ", 2);
-        return accessToken
+        return accessToken;
     }
 
     // in case no access token has been found on request must throw an error
     // indicating such issue (as expected)
     throw new OperationalError("No access token provided", 401);
-}
+};
 
 export default getRipeAuth;
