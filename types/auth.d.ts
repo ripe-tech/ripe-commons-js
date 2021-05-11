@@ -44,3 +44,4 @@ export type RipeAuth = {
 };
 
 export declare function getRipeAuth(req: unknown): RipeAuth;
+export declare function getReqToken(req: unknown): string;

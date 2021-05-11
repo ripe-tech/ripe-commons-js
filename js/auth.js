@@ -6,27 +6,7 @@ export const getRipeAuth = async req => {
     // an authorization information already present in it
     if (req.ripeAuth) return req.ripeAuth;
 
-    // allocates space for the access token value that is going
-    // to be "gathered" from all possible request sources
-    let accessToken = null;
-
-    // tries to "find" the token in the route parameters
-    if (req.params.token) accessToken = req.params.token;
-
-    // tries to "find" the token in the GET parameters
-    if (req.query.token) accessToken = req.query.token;
-
-    // tries to verify if the authorization header is present and
-    // if that's the case unpacks the token from it
-    if (req.headers.authorization) {
-        [, accessToken] = req.headers.authorization.split(" ", 2);
-    }
-
-    // in case no access token has been found on request must throw an error
-    // indicating such issue (as expected)
-    if (!accessToken) {
-        throw new OperationalError("No access token provided", 401);
-    }
+    const accessToken = getReqToken(req);
 
     // creates a new instance of the RIPE ID API client to be used for
     // the "redeem" operation of the access token
@@ -44,5 +24,24 @@ export const getRipeAuth = async req => {
     req.ripeAuth = auth;
     return req.ripeAuth;
 };
+
+export const getReqToken = req => {
+    // tries to "find" the token in the route parameters
+    if (req.params.token) return req.params.token;
+
+    // tries to "find" the token in the GET parameters
+    if (req.query.token) return req.query.token;
+
+    // tries to verify if the authorization header is present and
+    // if that's the case unpacks the token from it
+    if (req.headers.authorization) {
+        const [, accessToken] = req.headers.authorization.split(" ", 2);
+        return accessToken
+    }
+
+    // in case no access token has been found on request must throw an error
+    // indicating such issue (as expected)
+    throw new OperationalError("No access token provided", 401);
+}
 
 export default getRipeAuth;
