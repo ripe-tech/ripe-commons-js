@@ -41,6 +41,7 @@ export type RipeAcl = {
 export type RipeAuth = {
     account: RipeAccount;
     acl: RipeAcl;
+    token: string;
 };
 
 export declare function getRipeAuth(req: unknown): RipeAuth;
