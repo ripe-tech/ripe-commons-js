@@ -55,9 +55,9 @@ export const getRipeAuth = async req => {
         throw new OperationalError("Token not found", 401);
     }
 
-    // stores the (redeem) token associated with the request in the request itself
+    // stores the (redeem) token associated with the request in the authorization,
     // so that it can be easily retrieved latter if needed (no need to find the
-    // token among the multiple possible locations of it: GET, POST params)
+    // token among the multiple possible request locations: GET or POST params)
     auth.token = token;
 
     // updates the current request with the authorization information
