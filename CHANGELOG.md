@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Config, context, filter and utils from [ripe-components-vue](https://github.com/ripe-tech/ripe-components-vue)
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.4.0] - 2021-06-01
+
+### Added
+
+* Config, context, filter and utils from [ripe-components-vue](https://github.com/ripe-tech/ripe-components-vue)
 
 ## [0.3.6] - 2021-05-14
 
