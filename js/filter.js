@@ -59,7 +59,8 @@ export const filterToParams = (
     nameAlias = {},
     nameFunc = {},
     filterFields = {},
-    keywordFields = {}
+    keywordFields = {},
+    { imperfectFilterFields = null } = {}
 ) => {
     let operator = "$or";
     const { sort, reverse, filter, start, limit } = options;
@@ -86,8 +87,11 @@ export const filterToParams = (
         }
         operator = "$and";
     } else {
+        imperfectFilterFields = [null, undefined].includes(imperfectFilterFields)
+            ? filterFields
+            : imperfectFilterFields;
         filters.push(
-            ...Object.entries(filterFields).flatMap(([field, operator]) =>
+            ...Object.entries(imperfectFilterFields).flatMap(([field, operator]) =>
                 _buildFilter(field, operator, filterS, keywordFields)
             )
         );
