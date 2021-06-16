@@ -86,6 +86,10 @@ export const filterToParams = (
         }
         operator = "$and";
     } else {
+        // change the operator to '$and' if a keyword
+        // was provided, since a keyword can be composed
+        // of two filters
+        if (KEYWORDS[filterS]) operator = "$and";
         filters.push(
             ...Object.entries(filterFields).flatMap(([field, operator]) =>
                 _buildFilter(field, operator, filterS, keywordFields)
