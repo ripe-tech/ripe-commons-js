@@ -1,4 +1,5 @@
 export * from "./auth";
+export * from "./barcode";
 export * from "./config";
 export * from "./context";
 export * from "./filter";
