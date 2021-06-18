@@ -6,7 +6,7 @@
  * @param {String} value The string value to be encoded.
  * @returns {String} The Code 128 Set B value to be used with the
  * barcode 128 font family.
- * @see {@link https://www.precisionid.com/code-128-faq/}
+ * @see https://www.precisionid.com/code-128-faq/
  */
 export const encodeBarcode128B = value => {
     // builds the checksum for the encoded barcode value
