@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Function `encodeBarcode128B` that encode values to Code 128 set B, to use in barcodes
+* Function `encodeBarcode128B` that encodes values to Code 128 set B, to use in barcodes
 
 ### Changed
 
