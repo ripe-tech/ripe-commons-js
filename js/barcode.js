@@ -3,14 +3,14 @@
  * guidelines, so that the value can be shown using the
  * barcode 128 font.
  *
- * @param {*} value The string value to be encoded.
- * @returns The Code 128 Set B value to be used with the
+ * @param {String} value The string value to be encoded.
+ * @returns {String} The Code 128 Set B value to be used with the
  * barcode 128 font family.
  * @see {@link https://www.precisionid.com/code-128-faq/}
  */
 export const encodeBarcode128B = value => {
     // builds the checksum for the encoded barcode value
-    // 128 Set B by summing the START code (103) and the
+    // 128 Set B by summing the START code (104) and the
     // product of each data character with its position
     // within the data
     const length = value.length;
