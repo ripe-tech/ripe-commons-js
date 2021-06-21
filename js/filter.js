@@ -93,9 +93,11 @@ export const filterToParams = (
         // adds the multiple filters that will apply the filter string
         // to the multiple default targeting fields, effectively trying
         // to mach any of them (fuzzy string searching)
+        const flatMap = (f, xs) => xs.reduce((acc, x) => acc.concat(f(x)), []);
         filters.push(
-            ...Object.entries(filterFields).flatMap(([field, operator]) =>
-                _buildFilter(field, operator, filterS, keywordFields)
+            ...flatMap(
+                ([field, operator]) => _buildFilter(field, operator, filterS, keywordFields),
+                Object.entries(filterFields)
             )
         );
     }

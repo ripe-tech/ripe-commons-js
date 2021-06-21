@@ -82,7 +82,7 @@ describe("filter", function() {
                     `created:gte:${today.getTime() / 1000}`,
                     `created:lt:${tomorrow.getTime() / 1000}`
                 ],
-                filter_operator: "$or"
+                filter_operator: "$and"
             });
         });
     });
