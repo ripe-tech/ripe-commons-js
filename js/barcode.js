@@ -1,4 +1,8 @@
-const shiftChars = ["Ã", "Ä", "Å", "Æ", "Ç", "È", "É", "Ê"];
+/**
+ * The characters that are going to be used as the shift
+ * ones in the encoding operation.
+ */
+const SHIFT_CHARS = ["Ã", "Ä", "Å", "Æ", "Ç", "È", "É", "Ê"];
 
 /**
  * Encodes the given value following the Code 128 Set B
@@ -32,7 +36,7 @@ export const encodeBarcode128B = value => {
     // characters code with the respective characters
     const checksumInt = parseInt(checksumValue % 103, 10);
     const checksum =
-        checksumInt > 94 ? shiftChars[checksumInt - 95] : String.fromCharCode(checksumInt + 32);
+        checksumInt > 94 ? SHIFT_CHARS[checksumInt - 95] : String.fromCharCode(checksumInt + 32);
 
     // builds the encoded barcode value by adding the
     // START and STOP code, the value and the checksum
