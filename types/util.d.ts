@@ -1,1 +1,1 @@
-export declare function flatMap(f: () => unknown, xs: unknown[]): unknown[];
+export declare function flatMap<T, V>(f: (x: T) => V | V[], xs: T[]): V[];
