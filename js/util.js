@@ -40,7 +40,7 @@ export const buildSlug = value => {
 };
 
 /**
- * The flatMap function implementation that returns a new array
+ * The flat map function implementation that returns a new array
  * formed by applying a given callback function to each element
  * of the array, and then flattening the result by one level.
  *
