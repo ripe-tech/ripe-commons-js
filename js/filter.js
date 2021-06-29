@@ -1,3 +1,5 @@
+import { flatMap } from "./util";
+
 const OP_REGEX = /(?:(?:<=)|(?:<)|(?:>=)|(?:>)|(?:=))/;
 
 const OP_ALIAS = {
@@ -94,8 +96,9 @@ export const filterToParams = (
         // to the multiple default targeting fields, effectively trying
         // to mach any of them (fuzzy string searching)
         filters.push(
-            ...Object.entries(filterFields).flatMap(([field, operator]) =>
-                _buildFilter(field, operator, filterS, keywordFields)
+            ...flatMap(
+                ([field, operator]) => _buildFilter(field, operator, filterS, keywordFields),
+                Object.entries(filterFields)
             )
         );
     }

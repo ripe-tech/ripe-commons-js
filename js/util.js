@@ -38,3 +38,16 @@ export const buildSlug = value => {
         .replace(/[^\w\-]+/g, "")
         .replace(/\-\-+/g, "-");
 };
+
+/**
+ * The flat map function implementation that returns a new array
+ * formed by applying a given callback function to each element
+ * of the array, and then flattening the result by one level.
+ *
+ * @param {Function} f The function that produces an element of
+ * the new array.
+ * @param {Array} xs The initial array.
+ * @returns {Array} A new array with each element being the result
+ * of the callback function and flattened to a depth of 1.
+ */
+export const flatMap = (f, xs) => xs.reduce((acc, x) => acc.concat(f(x)), []);
