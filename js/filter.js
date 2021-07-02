@@ -61,7 +61,8 @@ export const filterToParams = (
     nameAlias = {},
     nameFunc = {},
     filterFields = {},
-    keywordFields = {}
+    keywordFields = {},
+    { imperfectFilterFields = null } = {}
 ) => {
     let operator = "$or";
     const { sort, reverse, filter, start, limit } = options;
@@ -88,6 +89,10 @@ export const filterToParams = (
         }
         operator = "$and";
     } else {
+        // defaults the imperfect filters fields as the complete set
+        // of filter fields in case they are not provided
+        imperfectFilterFields = imperfectFilterFields || filterFields;
+
         // changes the operator to '$and' if a keyword was provided,
         // since a keyword can be composed of two or more filters
         if (KEYWORDS[filterS]) operator = "$and";
@@ -98,7 +103,7 @@ export const filterToParams = (
         filters.push(
             ...flatMap(
                 ([field, operator]) => _buildFilter(field, operator, filterS, keywordFields),
-                Object.entries(filterFields)
+                Object.entries(imperfectFilterFields)
             )
         );
     }
