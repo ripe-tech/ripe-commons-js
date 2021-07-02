@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *
 
+## [0.4.1] - 2021-06-21
+
+### Added
+
+* Function `encodeBarcode128B` that encodes values to Code 128 set B, to use in barcodes
+
 ## [0.4.0] - 2021-06-01
 
 ### Added
