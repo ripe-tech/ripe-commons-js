@@ -89,6 +89,8 @@ export const filterToParams = (
         }
         operator = "$and";
     } else {
+        // defaults the imperfect filters fields as the complete set
+        // of filter fields in case they are not provided
         imperfectFilterFields = imperfectFilterFields || filterFields;
 
         // changes the operator to '$and' if a keyword was provided,
