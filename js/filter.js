@@ -87,9 +87,7 @@ export const filterToParams = (
         }
         operator = "$and";
     } else {
-        imperfectFilterFields = [null, undefined].includes(imperfectFilterFields)
-            ? filterFields
-            : imperfectFilterFields;
+        imperfectFilterFields = imperfectFilterFields || filterFields;
         filters.push(
             ...Object.entries(imperfectFilterFields).flatMap(([field, operator]) =>
                 _buildFilter(field, operator, filterS, keywordFields)
