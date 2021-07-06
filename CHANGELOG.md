@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Allow having different filter fields when the match is not perfect (in `filterToParams`)
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.5.0] - 2021-07-06
+
+### Added
+
+* Allow having different filter fields when the match is not perfect (in `filterToParams`)
 
 ## [0.4.1] - 2021-06-21
 
