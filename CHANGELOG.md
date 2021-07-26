@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Support for "smart" line breaking using `breakString()`
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.5.1] - 2021-07-26
+
+### Added
+
+* Support for "smart" line breaking using `breakString()`
 
 ## [0.5.0] - 2021-07-06
 
