@@ -3,6 +3,7 @@ export * from "./barcode";
 export * from "./config";
 export * from "./context";
 export * from "./filter";
+export * from "./string";
 export * from "./fastify";
 export * from "./time";
 export * from "./url";

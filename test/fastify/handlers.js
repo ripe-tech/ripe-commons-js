@@ -4,7 +4,7 @@ const ripeCommons = require("../..");
 describe("Handlers", function() {
     this.timeout(30000);
 
-    describe("#errorHandlerFastify", function() {
+    describe("#errorHandlerFastify()", function() {
         it("should be able to update the error with the given status code and error message", async () => {
             let errorResult = {};
             const res = {
