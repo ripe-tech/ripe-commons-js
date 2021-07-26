@@ -53,7 +53,7 @@ describe("String", function() {
             assert.rejects(
                 () =>
                     ripeCommons.breakString(
-                        "A very long address line that does not fit in the UPS limit of three lines each with thirty five characters",
+                        "A very long address line that does not fit in the string limit of three lines each with thirty five characters",
                         35,
                         3
                     ),
