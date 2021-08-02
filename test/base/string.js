@@ -5,7 +5,7 @@ describe("String", function() {
     describe("#breakString", function() {
         it("should not break if it fits in a single line", () => {
             const lines = ripeCommons.breakString("Small Address Line", 35, 3);
-            assert.deepStrictEqual(["Small Address Line"], lines);
+            assert.deepStrictEqual(lines, ["Small Address Line"]);
         });
 
         it("should break by new lines when present", () => {
@@ -14,7 +14,7 @@ describe("String", function() {
                 35,
                 3
             );
-            assert.deepStrictEqual(["Address Line1", "Address Line2", "Address Line3"], lines);
+            assert.deepStrictEqual(lines, ["Address Line1", "Address Line2", "Address Line3"]);
         });
 
         it("should break by whole words when possible", () => {
@@ -23,14 +23,11 @@ describe("String", function() {
                 35,
                 3
             );
-            assert.deepStrictEqual(
-                [
-                    "A very long address line that is",
-                    "going to be broken preferably word",
-                    "by word"
-                ],
-                lines
-            );
+            assert.deepStrictEqual(lines, [
+                "A very long address line that is",
+                "going to be broken preferably word",
+                "by word"
+            ]);
         });
 
         it("should break words if necessary to fit", () => {
@@ -39,14 +36,11 @@ describe("String", function() {
                 35,
                 3
             );
-            assert.deepStrictEqual(
-                [
-                    "A very long address line that is go",
-                    "ing to be broken as necessary to fi",
-                    "t the limit of 3 lines............."
-                ],
-                lines
-            );
+            assert.deepStrictEqual(lines, [
+                "A very long address line that is go",
+                "ing to be broken as necessary to fi",
+                "t the limit of 3 lines............."
+            ]);
         });
 
         it("should fail to break the address line since it does not fit in three lines", () => {
