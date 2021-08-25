@@ -51,3 +51,39 @@ export const buildSlug = value => {
  * of the callback function and flattened to a depth of 1.
  */
 export const flatMap = (f, xs) => xs.reduce((acc, x) => acc.concat(f(x)), []);
+
+/**
+ * Parses a query string and builds an object with each
+ * query parameter and its respective value.
+ *
+ * This method should only be used when `URLSearchParams`
+ * class is not available in Javascript environment.
+ *
+ * @param {String} query The query string (search params) to be parsed,
+ * should not include the '?' character.
+ * @returns {Object} An object containing the query parameters
+ * keys and its respective values
+ */
+export const parseSearchParams = query => {
+    const options = {};
+    const parts = query.split("&");
+
+    for (const part of parts) {
+        if (part.indexOf("=") === -1) {
+            options[decodeURIComponent(part).trim()] = true;
+        } else {
+            const tuple = part.split("=");
+            const key = decodeURIComponent(tuple[0].replace(/\+/g, "%20")).trim();
+            const value = decodeURIComponent(tuple[1].replace(/\+/g, "%20")).trim();
+            if (options[key] === undefined) {
+                options[key] = value;
+            } else if (Array.isArray(options[key])) {
+                options[key].push(value);
+            } else {
+                options[key] = [options[key], value];
+            }
+        }
+    }
+
+    return options;
+};

@@ -1,7 +1,7 @@
 global.window = global;
 
 const assert = require("assert");
-const ripeCommons = require("../..");
+const ripeCommons = require("..");
 
 describe("Barcode", function() {
     describe("#encodeBarcode128B()", function() {
