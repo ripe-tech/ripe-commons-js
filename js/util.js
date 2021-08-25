@@ -56,17 +56,19 @@ export const flatMap = (f, xs) => xs.reduce((acc, x) => acc.concat(f(x)), []);
  * Parses a query string and builds an object with each
  * query parameter and its respective value.
  *
- * @param {String} query The query string to be parsed.
- * @returns An object containing the query parameters
+ * This method should only be used when `URLSearchParams`
+ * class is not available in Javascript environment.
+ *
+ * @param {String} query The query string (search params) to be parsed,
+ * should not include the '?' character.
+ * @returns {Object} An object containing the query parameters
  * keys and its respective values
  */
-export const unpackQuery = query => {
-    const parts = query.split("&");
+export const parseSearchParams = query => {
     const options = {};
+    const parts = query.split("&");
 
-    for (let index = 0; index < parts.length; index++) {
-        const part = parts[index];
-
+    for (const part of parts) {
         if (part.indexOf("=") === -1) {
             options[decodeURIComponent(part).trim()] = true;
         } else {

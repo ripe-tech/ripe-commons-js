@@ -1,7 +1,7 @@
 global.window = global;
 
 const assert = require("assert");
-const ripeCommons = require("../..");
+const ripeCommons = require("..");
 
 describe("serializeContext()", function() {
     it("should be able to serialize simple context", () => {
