@@ -1,8 +1,8 @@
-export const dateString = function(
+export const dateString = (
     timestamp,
     separator = "/",
     { year = true, month = true, day = true } = {}
-) {
+) => {
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const dayV = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
@@ -14,11 +14,12 @@ export const dateString = function(
     if (year) buffer.push(yearV);
     return buffer.join(separator);
 };
-export const dateStringUTC = function(
+
+export const dateStringUTC = (
     timestamp,
     separator = "/",
     { year = true, month = true, day = true } = {}
-) {
+) => {
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const dayV = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
@@ -30,11 +31,12 @@ export const dateStringUTC = function(
     if (year) buffer.push(yearV);
     return buffer.join(separator);
 };
-export const timeString = function(
+
+export const timeString = (
     timestamp,
     separator = ":",
     { hours = true, minutes = true, seconds = true } = {}
-) {
+) => {
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const hoursV = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
@@ -45,11 +47,12 @@ export const timeString = function(
     if (seconds) buffer.push(secondsV);
     return buffer.join(separator);
 };
-export const timeStringUTC = function(
+
+export const timeStringUTC = (
     timestamp,
     separator = ":",
     { hours = true, minutes = true, seconds = true } = {}
-) {
+) => {
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const hoursV = date.getUTCHours() < 10 ? `0${date.getUTCHours()}` : date.getUTCHours();
@@ -60,3 +63,5 @@ export const timeStringUTC = function(
     if (seconds) buffer.push(secondsV);
     return buffer.join(separator);
 };
+
+export default dateString;

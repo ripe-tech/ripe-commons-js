@@ -19,6 +19,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *
 
+## [0.6.0] - 2021-08-02
+
+### Added
+
+* Support for `splitArray` function in the array file
+
+## [0.5.1] - 2021-07-26
+
+### Added
+
+* Support for "smart" line breaking using `breakString()`
+
 ## [0.5.0] - 2021-07-06
 
 ### Added

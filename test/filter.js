@@ -3,8 +3,8 @@ global.window = global;
 const assert = require("assert");
 const ripeCommons = require("..");
 
-describe("filter", function() {
-    describe("filterToParams()", function() {
+describe("Filter", function() {
+    describe("#filterToParams()", function() {
         it("should be able to build a filter string to filter only for id equal to 2", () => {
             const options = {
                 filter: "id=2",
