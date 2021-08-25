@@ -1,5 +1,5 @@
 const assert = require("assert");
-const ripeCommons = require("../..");
+const ripeCommons = require("..");
 
 describe("Array", function() {
     describe("#splitArray", function() {
