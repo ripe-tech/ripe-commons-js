@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Parse query function as `parseSearchParams()`
+*
 
 ### Changed
 
@@ -18,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.7.0] - 2021-09-02
+
+### Added
+
+* Parse query function as `parseSearchParams()`
+* `moneyMixin`
 
 ## [0.6.0] - 2021-08-02
 
