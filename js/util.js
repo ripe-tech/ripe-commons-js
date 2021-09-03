@@ -87,3 +87,18 @@ export const parseSearchParams = query => {
 
     return options;
 };
+
+/**
+ * Turns a number into a string with a given
+ * length using a given filler character.
+ *
+ * @param {Number} number The number to be turned into text.
+ * @param {Number} length The desired length of the resulting text.
+ * @param {String} filler The character to use as filling.
+ * @returns {String} The number in text format with desired length.
+ */
+export const nDigitsText = (number, length = 2, filler = "0") => {
+    const text = number.toString();
+    if (text.length >= length) return text.slice(0, length);
+    return filler.repeat(length - text.length) + text;
+};
