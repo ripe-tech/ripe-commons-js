@@ -47,3 +47,37 @@ describe("parseSearchParams()", function() {
         assert.deepStrictEqual(result, { hello: "hello world", hello2: "hello world2" });
     });
 });
+
+describe("nDigitsText()", function() {
+    it("should be able to add filler characters to small numbers", () => {
+        let result = ripeCommons.nDigitsText(9);
+        assert.deepStrictEqual(result, "09");
+
+        result = ripeCommons.nDigitsText(5, 3);
+        assert.deepStrictEqual(result, "005");
+    });
+
+    it("should do nothing to big enough numbers", () => {
+        let result = ripeCommons.nDigitsText(50);
+        assert.deepStrictEqual(result, "50");
+
+        result = ripeCommons.nDigitsText(5000, 4);
+        assert.deepStrictEqual(result, "5000");
+    });
+
+    it("should cut huge numbers to the desired size", () => {
+        let result = ripeCommons.nDigitsText(10000000);
+        assert.deepStrictEqual(result, "10");
+
+        result = ripeCommons.nDigitsText(10000000, 4);
+        assert.deepStrictEqual(result, "1000");
+    });
+
+    it("should be able to use different filling characters", () => {
+        let result = ripeCommons.nDigitsText(5, 4);
+        assert.deepStrictEqual(result, "0005");
+
+        result = ripeCommons.nDigitsText(5, 4, "X");
+        assert.deepStrictEqual(result, "XXX5");
+    });
+});
