@@ -53,11 +53,6 @@ const KEYWORDS = {
         const nextMonth = new Date(new Date(today.setMonth(month + 1)).setDate(1));
         const nextNextMonth = new Date(new Date(today.setMonth(month + 2)).setDate(1));
         return _buildKeywordQuery(field, operator, nextMonth, nextNextMonth);
-    },
-    "@recently-updated": () => {
-        const recentOrderDotSeconds = 600;
-        const recentTime = new Date((Date.now() - recentOrderDotSeconds * 1000));
-        return _buildKeywordQuery("last_updated", "gt", null, recentTime);
     }
 };
 
