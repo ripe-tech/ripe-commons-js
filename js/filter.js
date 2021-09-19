@@ -156,14 +156,14 @@ const _buildKeywordQuery = (field, operator, left, right) => {
     switch (operator) {
         case "gt":
         case "gte":
-            return [`${field}:${operator}:${right.getTime() / 1000}`];
+            return [`${field}:${operator}:${Math.floor(right.getTime() / 1000)}`];
         case "lt":
         case "lte":
-            return [`${field}:${operator}:${left.getTime() / 1000}`];
+            return [`${field}:${operator}:${Math.floor(left.getTime() / 1000)}`];
         default:
             return [
-                `${field}:gte:${left.getTime() / 1000}`,
-                `${field}:lt:${right.getTime() / 1000}`
+                `${field}:gte:${Math.floor(left.getTime() / 1000)}`,
+                `${field}:lt:${Math.floor(right.getTime() / 1000)}`
             ];
     }
 };
