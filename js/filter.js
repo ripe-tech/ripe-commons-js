@@ -62,7 +62,7 @@ export const filterToParams = (
     nameFunc = {},
     filterFields = {},
     keywordFields = {},
-    { imperfectFilterFields = null } = {}
+    { imperfectFilterFields = null, keywords = KEYWORDS } = {}
 ) => {
     let operator = "$or";
     const { sort, reverse, filter, start, limit } = options;
@@ -82,10 +82,12 @@ export const filterToParams = (
             key = key.replace(/-/g, "_");
             const field = nameAlias[key] || key;
             const fieldFunc = nameFunc[field];
-            value = KEYWORDS[value] || !fieldFunc ? value : fieldFunc(value);
+            value = keywords[value] || !fieldFunc ? value : fieldFunc(value);
             arithOp = arithOp === "=" ? filterFields[field] : OP_ALIAS[arithOp];
             if (!field || !arithOp) continue;
-            filters.push(..._buildFilter(field, arithOp, value, keywordFields));
+            filters.push(
+                ..._buildFilter(field, arithOp, value, keywordFields, { keywords: keywords })
+            );
         }
         operator = "$and";
     } else {
@@ -95,14 +97,15 @@ export const filterToParams = (
 
         // changes the operator to '$and' if a keyword was provided,
         // since a keyword can be composed of two or more filters
-        if (KEYWORDS[filterS]) operator = "$and";
+        if (keywords[filterS]) operator = "$and";
 
         // adds the multiple filters that will apply the filter string
         // to the multiple default targeting fields, effectively trying
         // to mach any of them (fuzzy string searching)
         filters.push(
             ...flatMap(
-                ([field, operator]) => _buildFilter(field, operator, filterS, keywordFields),
+                ([field, operator]) =>
+                    _buildFilter(field, operator, filterS, keywordFields, { keywords: keywords }),
                 Object.entries(imperfectFilterFields)
             )
         );
@@ -132,24 +135,26 @@ export const filterToParams = (
  * @param {String} value The target value of the comparison operation.
  * @param {Object} keywordFields An object that associated a certain field name
  * with the set of keywords that are "allowed".
+ * @param {Object} options An object that contains a set of objects to
+ * fine-tune this function's behavior.
  * @returns {Array} The sequence of filters (in canonical format) to be used
  * in the construction of a "normalized" query.
  */
-const _buildFilter = (field, arithOp, value, keywordFields) => {
+const _buildFilter = (field, arithOp, value, keywordFields, { keywords = KEYWORDS } = {}) => {
     // verifies if the value is a keyword, if not
     // returns the filter query with the given value
-    const keywordF = KEYWORDS[value];
+    const keywordF = keywords[value];
     if (!keywordF) return [`${field}:${arithOp}:${value}`];
 
     // verifies if the field given allows the usage of the
     // current keyword, forbidding invalid usage of keyword
     // with fields that do not support it
-    const keywords = keywordFields[field];
-    if (!keywords || !keywords.includes(value)) return [];
+    const keywordField = keywordFields[field];
+    if (!keywordField || !keywordField.includes(value)) return [];
 
     // replaces the keyword in the value with its
     // respective translation
-    return KEYWORDS[value](field, arithOp);
+    return keywords[value](field, arithOp);
 };
 
 const _buildKeywordQuery = (field, operator, left, right) => {

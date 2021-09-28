@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Support for custom keywords in `filterToParams`, such as `@recently-updated` or `@recently-rejected`
 
 ### Changed
 
