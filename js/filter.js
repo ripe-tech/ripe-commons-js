@@ -9,7 +9,7 @@ const OP_ALIAS = {
     "<=": "lte"
 };
 
-const KEYWORDS = {
+export const KEYWORDS = {
     "@today": (field, operator) => {
         const today = new Date(new Date().setHours(0, 0, 0, 0));
         const tomorrow = new Date(today);
