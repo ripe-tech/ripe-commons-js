@@ -9,7 +9,7 @@ const OP_ALIAS = {
     "<=": "lte"
 };
 
-export const KEYWORDS = {
+export const FILTER_KEYWORDS = {
     "@today": (field, operator) => {
         const today = new Date(new Date().setHours(0, 0, 0, 0));
         const tomorrow = new Date(today);
@@ -62,7 +62,7 @@ export const filterToParams = (
     nameFunc = {},
     filterFields = {},
     keywordFields = {},
-    { imperfectFilterFields = null, keywords = KEYWORDS } = {}
+    { imperfectFilterFields = null, keywords = FILTER_KEYWORDS } = {}
 ) => {
     let operator = "$or";
     const { sort, reverse, filter, start, limit } = options;
@@ -140,7 +140,13 @@ export const filterToParams = (
  * @returns {Array} The sequence of filters (in canonical format) to be used
  * in the construction of a "normalized" query.
  */
-const _buildFilter = (field, arithOp, value, keywordFields, { keywords = KEYWORDS } = {}) => {
+const _buildFilter = (
+    field,
+    arithOp,
+    value,
+    keywordFields,
+    { keywords = FILTER_KEYWORDS } = {}
+) => {
     // verifies if the value is a keyword, if not
     // returns the filter query with the given value
     const keywordF = keywords[value];
