@@ -85,5 +85,43 @@ describe("Filter", function() {
                 filter_operator: "$and"
             });
         });
+
+        it("should be able to build a filter string to filter by custom keyword @something", () => {
+            const options = {
+                filter: "@something",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: ["@something", "@yesterday"]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields,
+                {
+                    keywords: {
+                        "@something": (field, operator) => "someField:someOperator:someValue"
+                    }
+                }
+            );
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": ["someField:someOperator:someValue"],
+                filter_operator: "$and"
+            });
+        });
     });
 });
