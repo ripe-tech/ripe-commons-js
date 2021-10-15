@@ -20,7 +20,7 @@ export const normalize = (value, { lastPart = false, capitalize = false } = {}) 
     values = capitalize ? values.map(_value => _value[0].toUpperCase() + _value.slice(1)) : values;
 
     // joins the several components
-    return values.join(" ");
+    return values.join(" ").trim();
 };
 
 /**
