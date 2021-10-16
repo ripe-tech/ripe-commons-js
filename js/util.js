@@ -7,20 +7,31 @@
  * normalization process.
  * @returns {String} The final normalized values.
  */
-export const normalize = (value, { lastPart = false, capitalize = false } = {}) => {
+export const normalize = (
+    value,
+    { lastPart = false, capitalize = false, trim = true, separator = " " } = {}
+) => {
     // if the normalization is set to only use the last component
     // of a dot-separated value, retrieves that part
-    value = lastPart ? value.split(".").pop() : value;
+    if (lastPart) value = value.split(".").pop();
 
     // splits the underscore-separated value in its components
     let values = value.split("_");
 
     // if the normalization is set to capitalize, converts
     // the first letter of each component to uppercase
-    values = capitalize ? values.map(_value => _value[0].toUpperCase() + _value.slice(1)) : values;
+    if (capitalize) values = values.map(_value => _value[0].toUpperCase() + _value.slice(1));
 
-    // joins the several components
-    return values.join(" ").trim();
+    // joins the several components using the expected separator
+    value = values.join(separator);
+
+    // in case trimming of the final string is requested then
+    // performs the trimming which might avoid extra space characters
+    // at the final string (better final string quality)
+    if (trim) value = value.trim();
+
+    // returns the final string value to the caller method
+    return value;
 };
 
 /**
