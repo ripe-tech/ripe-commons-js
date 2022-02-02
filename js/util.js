@@ -101,11 +101,11 @@ export const parseSearchParams = query => {
 
 /**
  * Returns the correct mime type to a given file format.
- * 
- * @param {String} format The format identifier of a file. 
+ *
+ * @param {String} format The format identifier of a file.
  * @returns The mime type for the given format.
  */
-export const mimeType = (format) => {
+export const mimeType = format => {
     switch (format) {
         case "html":
             return "text/html";
