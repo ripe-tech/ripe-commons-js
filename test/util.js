@@ -47,3 +47,25 @@ describe("parseSearchParams()", function() {
         assert.deepStrictEqual(result, { hello: "hello world", hello2: "hello world2" });
     });
 });
+
+describe("mimeType()", function() {
+    it("should return the default mime type", async () => {
+        const mime = await ripeCommons.mimeType("gif");
+        assert.strictEqual(mime, "gif");
+    });
+
+    it("should return the HTML mime type", async () => {
+        const mime = await ripeCommons.mimeType("html");
+        assert.strictEqual(mime, "text/html");
+    });
+
+    it("should return the PDF mime type", async () => {
+        const mime = await ripeCommons.mimeType("pdf");
+        assert.strictEqual(mime, "application/pdf");
+    });
+
+    it("should return the PNG mime type", async () => {
+        const mime = await ripeCommons.mimeType("png");
+        assert.strictEqual(mime, "image/png");
+    });
+});
