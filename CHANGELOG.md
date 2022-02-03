@@ -9,15 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.8.0] - 2021-10-13
+
+### Added
+
 * Added `mimeType` util function that returns the correct mime type of a given file format
 
 ### Changed
 
 * Added more options to the `normalize()` method
-
-### Fixed
-
-*
 
 ## [0.7.2] - 2021-10-13
 
