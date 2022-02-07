@@ -72,8 +72,8 @@ const _breakStringByWord = (value, maxLength = 80) => {
             line = "";
         }
     });
-    line = line[line.length - 1] === " " ? line.slice(0, -1) : line;
-    lines.push(line);
+    line = line.trim();
+    if (line.length > 0) lines.push(line);
     return lines;
 };
 
