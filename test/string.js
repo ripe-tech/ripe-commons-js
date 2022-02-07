@@ -8,6 +8,11 @@ describe("String", function() {
             assert.deepStrictEqual(lines, ["Small Address Line"]);
         });
 
+        it("should not break if it exactly fits in a single line", () => {
+            const lines = ripeCommons.breakString("Exactly the limit of characters", 31, 2);
+            assert.deepStrictEqual(lines, ["Exactly the limit of characters"]);
+        });
+
         it("should break by new lines when present", () => {
             const lines = ripeCommons.breakString(
                 "Address Line1\nAddress Line2\nAddress Line3",
@@ -43,8 +48,21 @@ describe("String", function() {
             ]);
         });
 
+        it("should trim the beginning and end of lines", () => {
+            const lines = ripeCommons.breakString(
+                "   A very long address line that is     going to be broken preferably word by    word   ",
+                35,
+                3
+            );
+            assert.deepStrictEqual(lines, [
+                "A very long address line that is",
+                "going to be broken preferably word",
+                "by    word"
+            ]);
+        });
+
         it("should fail to break the address line since it does not fit in three lines", () => {
-            assert.rejects(
+            assert.throws(
                 () =>
                     ripeCommons.breakString(
                         "A very long address line that does not fit in the string limit of three lines each with thirty five characters",
@@ -53,7 +71,7 @@ describe("String", function() {
                     ),
                 err => {
                     assert.strictEqual(err.name, "Error");
-                    assert.strictEqual(err.message, "Address is too long");
+                    assert.strictEqual(err.message, "Value is too long");
                     return true;
                 }
             );
