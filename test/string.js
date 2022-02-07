@@ -8,6 +8,11 @@ describe("String", function() {
             assert.deepStrictEqual(lines, ["Small Address Line"]);
         });
 
+        it("should not break if it exactly fits in a single line", () => {
+            const lines = ripeCommons.breakString("Exactly the limit of characters", 31, 2);
+            assert.deepStrictEqual(lines, ["Exactly the limit of characters"]);
+        });
+
         it("should break by new lines when present", () => {
             const lines = ripeCommons.breakString(
                 "Address Line1\nAddress Line2\nAddress Line3",
