@@ -44,7 +44,7 @@ describe("String", function() {
         });
 
         it("should fail to break the address line since it does not fit in three lines", () => {
-            assert.rejects(
+            assert.throws(
                 () =>
                     ripeCommons.breakString(
                         "A very long address line that does not fit in the string limit of three lines each with thirty five characters",
@@ -53,7 +53,7 @@ describe("String", function() {
                     ),
                 err => {
                     assert.strictEqual(err.name, "Error");
-                    assert.strictEqual(err.message, "Address is too long");
+                    assert.strictEqual(err.message, "Value is too long");
                     return true;
                 }
             );
