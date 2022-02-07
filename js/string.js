@@ -63,20 +63,24 @@ const _breakStringByWord = (value, maxLength = 80, trim = true) => {
     // to be able to allocate them over the multiple lines
     value.split(" ").forEach(word => {
         if ((line + word).length > maxLength) {
-            if (trim) line = line.trim();
+            if (trim) line = line.trimEnd();
             lines.push(line);
-            line = word;
-        } else {
-            line += word;
+            line = "";
         }
 
+        // adds the new work in iteration to the line,
+        // may be either a new or existing line
+        line += word;
+
+        // makes sure that no extra spaces exist at the
+        // start of the line and adds the word separator
         line = line.trimStart();
         line += " ";
     });
 
     // trims the last line an in case the line is valid
     // adds it to the complete set of lines
-    if (trim) line = line.trim();
+    if (trim) line = line.trimEnd();
     if (line.length > 0) lines.push(line);
 
     // returns the final sequence of lines with the complete
