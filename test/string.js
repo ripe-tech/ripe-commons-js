@@ -48,6 +48,19 @@ describe("String", function() {
             ]);
         });
 
+        it("should trim the beginning and end of lines", () => {
+            const lines = ripeCommons.breakString(
+                "   A very long address line that is     going to be broken preferably word by    word   ",
+                35,
+                3
+            );
+            assert.deepStrictEqual(lines, [
+                "A very long address line that is",
+                "going to be broken preferably word",
+                "by    word"
+            ]);
+        });
+
         it("should fail to break the address line since it does not fit in three lines", () => {
             assert.throws(
                 () =>
