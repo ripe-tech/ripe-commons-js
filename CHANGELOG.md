@@ -17,9 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+*
+
+## [0.8.1] - 2022-02-07
+
+### Fixed
+
 * `breakString` bug where an additional empty line was returned if the string **exactly** fit the last line
 
-## [0.8.0] - 2021-10-13
+## [0.8.0] - 2022-02-03
 
 ### Added
 
