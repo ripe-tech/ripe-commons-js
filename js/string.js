@@ -49,10 +49,12 @@ const _breakStringByParagraph = value => {
  * using a work keeping strategy.
  * @param {Number} maxLength The maximum length (as number of characters)
  * allowed per line split.
+ * @param {Boolean} trim If the lines should be right and left trimmed to
+ * avoid extra unwanted space characters.
  * @returns {Array} The complete set of lines splitted using a per word
  * strategy.
  */
-const _breakStringByWord = (value, maxLength = 80) => {
+const _breakStringByWord = (value, maxLength = 80, trim = true) => {
     const lines = [];
     let line = "";
 
@@ -61,7 +63,7 @@ const _breakStringByWord = (value, maxLength = 80) => {
     // to be able to allocate them over the multiple lines
     value.split(" ").forEach(word => {
         if ((line + word).length > maxLength) {
-            line = line.trim();
+            if (trim) line = line.trim();
             lines.push(line);
             line = word;
         } else {
@@ -74,7 +76,7 @@ const _breakStringByWord = (value, maxLength = 80) => {
 
     // trims the last line an in case the line is valid
     // adds it to the complete set of lines
-    line = line.trim();
+    if (trim) line = line.trim();
     if (line.length > 0) lines.push(line);
 
     // returns the final sequence of lines with the complete
