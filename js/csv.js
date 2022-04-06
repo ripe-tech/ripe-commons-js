@@ -4,7 +4,7 @@
  * @param {Object} object The object to convert.
  * @returns {String} The converted string.
  */
-export const objectToCSV = async object => {
+export const objectToCsv = object => {
     let csv = "";
     if (Object.keys(object) === 0) return csv;
 
@@ -46,7 +46,7 @@ export const readCsv = (file, parser = null) => {
         reader.onerror = e => reject(e);
         reader.readAsText(file);
     });
-}
+};
 
 /**
  * Creates the contents of the CSV file with the data given
@@ -56,10 +56,8 @@ export const readCsv = (file, parser = null) => {
  * @param {Array} headers List of headers for the CSV file.
  */
 export const buildCsv = (data, headers = []) => {
-    return [headers, ...data]
-        .map(row => row.map(r => _toString(r)).join(","))
-        .join("\n");
-}
+    return [headers, ...data].map(row => row.map(r => _toString(r)).join(",")).join("\n");
+};
 
 export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
     // in case the sanitize operation has been required runs a pre-operation
@@ -96,12 +94,12 @@ export const parseCsvComplex = (dataS, object = false, sanitize = true, delimite
     // values to properly pars the CSV values
     const pattern = new RegExp(
         "(\\" +
-        delimiter +
-        "|\\r?\\n|\\r|^)" +
-        '(?:"([^"]*(?:""[^"]*)*)"|' +
-        '([^"\\' +
-        delimiter +
-        "\\r\\n]*))",
+            delimiter +
+            "|\\r?\\n|\\r|^)" +
+            '(?:"([^"]*(?:""[^"]*)*)"|' +
+            '([^"\\' +
+            delimiter +
+            "\\r\\n]*))",
         "gi"
     );
 
@@ -154,7 +152,7 @@ export const parseCsvComplex = (dataS, object = false, sanitize = true, delimite
 
     if (!object) return data;
     return _toObject(data);
-}
+};
 
 /**
  * Converts a sequence of parsed data items into a sequence of
@@ -194,4 +192,4 @@ export const _toString = value => {
         return `"${JSON.stringify(value).replaceAll('"', '""')}"`;
     }
     return value ? value.toString() : "";
-}
+};

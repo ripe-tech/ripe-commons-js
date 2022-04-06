@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Extracted CSV functions from `ripe-util-vue` - related to [#302](https://github.com/ripe-tech/ripe-pulse/issues/302)
 
 ### Changed
 
