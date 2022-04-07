@@ -19,40 +19,73 @@ export const readCsv = (file, parser = null) => {
  * Creates the contents of the CSV file with the data given
  * as an array of rows and the headers.
  *
- * @param {Array} data Array of rows with cell data.
- * @param {Array} headers List of headers for the CSV file.
+ * @param {Array / Object} data Data to be converted into CSV. Can be
+ * an array of strings, a JSON object, or an array of those.
+ * @param {Array} headers List of headers for the CSV file, is an array of strings.
+ * @param {String} delimiter The delimiter to be used in the CSV.
  * @returns A string containing the information for the CSV.
  */
-export const buildCsv = (data, headers = []) => {
+export const buildCsv = (data, headers = [], delimiter = ",") => {
+    let csv = "";
+    if (headers !== null && Object.keys(headers).length !== 0) csv += headers.toString() + "\n";
+
+    // is simple object
+    if (!Array.isArray(data)) {
+        return csv + _objectToCsv(data, headers, delimiter);
+    }
+    // is simple array
+    if (typeof data[0] === "string") return csv + _arrayToCsv(data, delimiter);
     if (Object.keys(data).length === 0) return "";
 
-    let csv = "";
-    if (headers !== null && headers.length !== 0) csv += headers.toString() + "\n";
-    const numFields = Object.keys(data[0]).length;
     for (let i = 0; i < Object.keys(data).length; i++) {
-        let entry = "";
-
         // check if array, if it is add value as is
         if (Array.isArray(data[i])) {
-            for (let j = 0; j < data[i].length; j++) {
-                entry += _parseStringComma(data[i][j]) + ",";
-            }
-            // remove unnecessary final comma
-            csv += entry.slice(0, -1) + "\n";
+            csv += _arrayToCsv(data[i], delimiter);
             continue;
         }
 
-        for (let j = 0; j < numFields; j++) {
-            if (data[i][headers[j]] !== null) {
-                const value =
-                    data[i][headers[j]] !== null ? data[i][headers[j]] : _toString(data[i]);
-                entry += _parseStringComma(value) + ",";
-            }
-        }
-        csv += entry.slice(0, -1) + "\n";
+        csv += _objectToCsv(data[i], headers, delimiter);
     }
 
     return csv;
+};
+
+/**
+ * Converts an object into a CSV.
+ *
+ * @param {Object} data The object to be converted.
+ * @param {*} headers The headers that are going to be
+ * searched for. If not existent, use keys for current
+ * data being converted.
+ * @param {*} delimiter The delimiter for the CSV.
+ * @returns A string of the converted object.
+ */
+export const _objectToCsv = (data, headers, delimiter) => {
+    let fields = headers;
+    if (headers === null || Object.keys(headers).length === 0) fields = Object.keys(data);
+    let csv = "";
+
+    for (let j = 0; j < fields.length; j++) {
+        if (data[fields[j]] !== null) {
+            csv += _parseStringComma(data[fields[j]], delimiter) + delimiter;
+        } else csv += ",";
+    }
+    return csv.slice(0, -1) + "\n";
+};
+
+/**
+ * Converts an array into a CSV.
+ *
+ * @param {Object} data The array to be converted.
+ * @param {*} delimiter The delimiter for the CSV.
+ * @returns A string of the converted array.
+ */
+export const _arrayToCsv = (data, delimiter) => {
+    let csv = "";
+    for (let j = 0; j < data.length; j++) {
+        csv += _parseStringComma(data[j], delimiter) + delimiter;
+    }
+    return csv.slice(0, -1) + "\n";
 };
 
 export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
@@ -174,8 +207,8 @@ export const _toObject = data => {
     return objects;
 };
 
-export const _parseStringComma = value => {
-    if (String(value).includes(",")) {
+export const _parseStringComma = (value, delimiter) => {
+    if (String(value).includes(delimiter)) {
         return '"' + String(value).replace(/["']/g, "") + '"';
     }
     return value;
