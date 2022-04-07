@@ -24,23 +24,31 @@ export const readCsv = (file, parser = null) => {
  * @returns A string containing the information for the CSV.
  */
 export const buildCsv = (data, headers = []) => {
-    if (Object.keys(data) === 0) return "";
+    if (Object.keys(data).length === 0) return "";
 
-    let csv = headers.toString();
+    let csv = "";
+    if (headers !== null && headers.length !== 0) csv += headers.toString() + "\n";
+    const numFields = Object.keys(data[0]).length;
     for (let i = 0; i < Object.keys(data).length; i++) {
         let entry = "";
-        for (let j = 0; j < headers.length; j++) {
-            // values containing the ',' character need to be parsed,
-            // otherwise values will not align with fields
-            const value = data[i][headers[j]];
-            if (String(value).includes(",")) {
-                entry += '"' + String(value).replace(/["']/g, "") + '",';
-            } else {
-                // only append truish values
-                entry += value ? value + "," : ",";
+
+        // check if array, if it is add value as is
+        if (Array.isArray(data[i])) {
+            for (let j = 0; j < data[i].length; j++) {
+                entry += _parseStringComma(data[i][j]) + ",";
+            }
+            // remove unnecessary final comma
+            csv += entry.slice(0, -1) + "\n";
+            continue;
+        }
+
+        for (let j = 0; j < numFields; j++) {
+            if (data[i][headers[j]] !== null) {
+                const value =
+                    data[i][headers[j]] !== null ? data[i][headers[j]] : _toString(data[i]);
+                entry += _parseStringComma(value) + ",";
             }
         }
-        // remove unnecessary final comma
         csv += entry.slice(0, -1) + "\n";
     }
 
@@ -164,6 +172,13 @@ export const _toObject = data => {
         objects.push(object);
     }
     return objects;
+};
+
+export const _parseStringComma = value => {
+    if (String(value).includes(",")) {
+        return '"' + String(value).replace(/["']/g, "") + '"';
+    }
+    return value;
 };
 
 /**
