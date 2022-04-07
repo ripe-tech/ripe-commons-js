@@ -1,37 +1,4 @@
 /**
- * Converts a JSON object to a valid CSV string file.
- *
- * @param {Object} object The object to convert.
- * @returns {String} The converted string.
- */
-export const objectToCsv = object => {
-    let csv = "";
-    if (Object.keys(object) === 0) return csv;
-
-    const fields = Object.keys(object[0]);
-    csv += fields.toString() + "\n";
-
-    for (let i = 0; i < Object.keys(object).length; i++) {
-        let entry = "";
-        for (let j = 0; j < fields.length; j++) {
-            // values containing the ',' character need to be parsed,
-            // otherwise values will not align with fields
-            const value = object[i][fields[j]];
-            if (String(value).includes(",")) {
-                entry += '"' + String(value).replace(/["']/g, "") + '",';
-            } else {
-                // only append truish values
-                entry += value ? value + "," : ",";
-            }
-        }
-        // remove unnecessary final comma
-        csv += entry.slice(0, -1) + "\n";
-    }
-
-    return csv;
-};
-
-/**
  * Reads a CSV file and returns a table with the data.
  *
  * @param {Blob|File} file The file object to be read.
@@ -54,9 +21,30 @@ export const readCsv = (file, parser = null) => {
  *
  * @param {Array} data Array of rows with cell data.
  * @param {Array} headers List of headers for the CSV file.
+ * @returns A string containing the information for the CSV.
  */
 export const buildCsv = (data, headers = []) => {
-    return [headers, ...data].map(row => row.map(r => _toString(r)).join(",")).join("\n");
+    if (Object.keys(data) === 0) return "";
+
+    let csv = headers.toString();
+    for (let i = 0; i < Object.keys(data).length; i++) {
+        let entry = "";
+        for (let j = 0; j < headers.length; j++) {
+            // values containing the ',' character need to be parsed,
+            // otherwise values will not align with fields
+            const value = data[i][headers[j]];
+            if (String(value).includes(",")) {
+                entry += '"' + String(value).replace(/["']/g, "") + '",';
+            } else {
+                // only append truish values
+                entry += value ? value + "," : ",";
+            }
+        }
+        // remove unnecessary final comma
+        csv += entry.slice(0, -1) + "\n";
+    }
+
+    return csv;
 };
 
 export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
@@ -150,13 +138,12 @@ export const parseCsvComplex = (dataS, object = false, sanitize = true, delimite
         data[data.length - 1].push(value);
     }
 
-    if (!object) return data;
-    return _toObject(data);
+    return object ? _toObject(data) : data;
 };
 
 /**
  * Converts a sequence of parsed data items into a sequence of
- * object like items structured according to the CVS.
+ * object like items structured according to the CSV.
  *
  * @param {Array} data The array of data items defined as sequences
  * of data items, the first element should be the header.
@@ -169,12 +156,12 @@ export const _toObject = data => {
     const items = data.slice(1);
     for (const item of items) {
         const object = {};
-        objects.push(object);
         for (let index = 0; index < header.length; index++) {
             const key = header[index];
             const value = item[index];
             object[key] = value;
         }
+        objects.push(object);
     }
     return objects;
 };
