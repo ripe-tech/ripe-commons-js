@@ -7,8 +7,8 @@ describe("csvMixin", () => {
     describe("#buildCsv", () => {
         it("should handle string arrays", () => {
             const input = ["João Magalhães", "Gabriel Candal"];
-            const result = ripeCommons.buildCsv(input, null, "\n");
-            assert.deepStrictEqual(result, "João Magalhães\nGabriel Candal\n");
+            const result = ripeCommons.buildCsv(input, []);
+            assert.deepStrictEqual(result, "João Magalhães,Gabriel Candal\n");
         });
 
         it("should handle basic objects", () => {
@@ -21,7 +21,17 @@ describe("csvMixin", () => {
             assert.deepStrictEqual(result, "name,title\nJoão Magalhães,mr\n");
         });
 
-        it("should handle objects when building", () => {
+        it("should handle custom delimiters", () => {
+            const headers = ["name", "title"];
+            const input = {
+                name: "João Magalhães",
+                title: "mr"
+            };
+            const result = ripeCommons.buildCsv(input, headers, ";");
+            assert.deepStrictEqual(result, "name;title\nJoão Magalhães;mr\n");
+        });
+
+        it("should handle normal objects with headers", () => {
             const headers = ["name", "title"];
             const input = [
                 {
@@ -74,7 +84,7 @@ describe("csvMixin", () => {
             );
         });
 
-        it("should handle array of strings when building", () => {
+        it("should handle normal array of strings with headers", () => {
             const headers = ["name", "title"];
             const input = [
                 ["João Magalhães", "mr"],
@@ -94,7 +104,7 @@ describe("csvMixin", () => {
             assert.deepStrictEqual(result, 'name,title\n"Magalhães, João",mr\nGabriel Candal,mr\n');
         });
 
-        it("should handle objects with empty headers", () => {
+        it("should handle objects without headers", () => {
             const input = [
                 {
                     name: "João Magalhães",
@@ -105,22 +115,7 @@ describe("csvMixin", () => {
                     title: "mr"
                 }
             ];
-            const result = ripeCommons.buildCsv(input, []);
-            assert.deepStrictEqual(result, "João Magalhães,mr\nGabriel Candal,mr\n");
-        });
-
-        it("should handle objects with null headers", () => {
-            const input = [
-                {
-                    name: "João Magalhães",
-                    title: "mr"
-                },
-                {
-                    name: "Gabriel Candal",
-                    title: "mr"
-                }
-            ];
-            const result = ripeCommons.buildCsv(input, null);
+            const result = ripeCommons.buildCsv(input);
             assert.deepStrictEqual(result, "João Magalhães,mr\nGabriel Candal,mr\n");
         });
 
@@ -130,7 +125,7 @@ describe("csvMixin", () => {
                 ["João Magalhães", "mr"],
                 ["Gabriel Candal", "mr"]
             ];
-            const result = ripeCommons.buildCsv(input, null);
+            const result = ripeCommons.buildCsv(input);
             assert.deepStrictEqual(result, "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n");
         });
     });

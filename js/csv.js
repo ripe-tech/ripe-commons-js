@@ -27,7 +27,7 @@ export const readCsv = (file, parser = null) => {
  */
 export const buildCsv = (data, headers = [], delimiter = ",") => {
     let csv = "";
-    if (headers !== null && Object.keys(headers).length !== 0) csv += headers.toString() + "\n";
+    if (Object.keys(headers).length !== 0) csv += headers.join(delimiter) + "\n";
 
     // is simple object
     if (!Array.isArray(data)) {
@@ -54,15 +54,15 @@ export const buildCsv = (data, headers = [], delimiter = ",") => {
  * Converts an object into a CSV.
  *
  * @param {Object} data The object to be converted.
- * @param {*} headers The headers that are going to be
+ * @param {Array} headers The headers that are going to be
  * searched for. If not existent, use keys for current
  * data being converted.
- * @param {*} delimiter The delimiter for the CSV.
+ * @param {String} delimiter The delimiter for the CSV.
  * @returns A string of the converted object.
  */
-export const _objectToCsv = (data, headers, delimiter) => {
+export const _objectToCsv = (data, headers, delimiter = ",") => {
     let fields = headers;
-    if (headers === null || Object.keys(headers).length === 0) fields = Object.keys(data);
+    if (Object.keys(headers).length === 0) fields = Object.keys(data);
     let csv = "";
 
     for (let j = 0; j < fields.length; j++) {
@@ -77,10 +77,10 @@ export const _objectToCsv = (data, headers, delimiter) => {
  * Converts an array into a CSV.
  *
  * @param {Object} data The array to be converted.
- * @param {*} delimiter The delimiter for the CSV.
+ * @param {String} delimiter The delimiter for the CSV.
  * @returns A string of the converted array.
  */
-export const _arrayToCsv = (data, delimiter) => {
+export const _arrayToCsv = (data, delimiter = ",") => {
     let csv = "";
     for (let j = 0; j < data.length; j++) {
         csv += _parseStringComma(data[j], delimiter) + delimiter;
@@ -207,7 +207,7 @@ export const _toObject = data => {
     return objects;
 };
 
-export const _parseStringComma = (value, delimiter) => {
+export const _parseStringComma = (value, delimiter = ",") => {
     if (String(value).includes(delimiter)) {
         return '"' + String(value).replace(/["']/g, "") + '"';
     }
