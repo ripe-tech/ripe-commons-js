@@ -1,4 +1,4 @@
-export const verifyKeyFastify =
+export const verifyKeyExpress =
     (key, { headerKey = "X-Secret-Key" } = {}) =>
     (req, res, next) => {
         if (!key) return next();
