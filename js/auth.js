@@ -1,5 +1,5 @@
-import { API } from "ripe-id-api";
 import { OperationalError } from "yonius";
+import { API } from "ripe-id-api";
 
 /**
  * Tries to obtain a RIPE authorization object (username and ACL)
