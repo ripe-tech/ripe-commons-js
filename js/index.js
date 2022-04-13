@@ -1,4 +1,3 @@
-export * from "./acl";
 export * from "./array";
 export * from "./auth";
 export * from "./barcode";
