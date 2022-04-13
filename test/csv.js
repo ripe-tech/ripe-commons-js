@@ -29,11 +29,9 @@ describe("csvMixin", () => {
 
         it("should handle string arrays with numbers", () => {
             const headers = [1, 2];
-            const input = [
-                [1, 2],
-            ];
+            const input = [[1, 2]];
             const result = ripeCommons.buildCsv(input, headers);
-            assert.deepStrictEqual(result, '1,2\n1,2\n');
+            assert.deepStrictEqual(result, "1,2\n1,2\n");
         });
 
         it("should handle objects with numbers", () => {
