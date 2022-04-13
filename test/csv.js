@@ -1,5 +1,3 @@
-global.window = global;
-
 const assert = require("assert");
 const ripeCommons = require("..");
 
@@ -7,7 +5,7 @@ describe("CSV", () => {
     describe("#buildCsv", () => {
         it("should handle basic string arrays", () => {
             const input = ["João Magalhães", "Gabriel Candal"];
-            const result = ripeCommons.buildCsv(input, []);
+            const result = ripeCommons.buildCsv(input);
             assert.deepStrictEqual(result, "João Magalhães,Gabriel Candal\n");
         });
 
@@ -193,7 +191,7 @@ describe("CSV", () => {
             ]);
         });
 
-        it("controls extra elements in line", () => {
+        it("should handle extra elements in line", () => {
             let result;
 
             result = ripeCommons.parseCsv(
@@ -252,7 +250,7 @@ describe("CSV", () => {
             ]);
         });
 
-        it("controls extra elements in line", () => {
+        it("should handle extra elements in line", () => {
             let result;
 
             result = ripeCommons.parseCsvComplex(

@@ -1,5 +1,3 @@
-global.window = global;
-
 const assert = require("assert");
 const ripeCommons = require("..");
 
