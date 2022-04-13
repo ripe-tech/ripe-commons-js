@@ -5,7 +5,7 @@
  * @param {Function} parser The function to be used in the
  * CSV parsing operation.
  */
-export const readCsv = (file, parser = null) => {
+export const parseCsvFile = (file, parser = null) => {
     parser = parser || parseCsvComplex;
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
