@@ -1,8 +1,8 @@
-export const verifyKeyFastify =
+export const verifyKeyExpress =
     (key, { headerKey = "X-Secret-Key" } = {}) =>
     (req, res, next) => {
         if (!key) return next();
-        const _key = req.query.key || req.headers[headerKey] || null;
+        const _key = req.query.key || req.headers[headerKey] || req.header(headerKey) || null;
         if (key === _key) return next();
         return next(new Error("Invalid key"));
     };

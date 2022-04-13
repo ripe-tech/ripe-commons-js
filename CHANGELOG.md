@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Express middleware not found and error handlers - [ripe-orchestra/#16](https://github.com/ripe-tech/ripe-orchestra/issues/16)
 
 ### Changed
 
-*
+* Refactored the ACL function out of the fastify module to be used by express as well - [ripe-orchestra/#16](https://github.com/ripe-tech/ripe-orchestra/issues/16)
 
 ### Fixed
 
