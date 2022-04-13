@@ -5,7 +5,7 @@ const ripeCommons = require("..");
 
 describe("csvMixin", () => {
     describe("#buildCsv", () => {
-        it("should handle string arrays", () => {
+        it("should handle basic string arrays", () => {
             const input = ["João Magalhães", "Gabriel Candal"];
             const result = ripeCommons.buildCsv(input, []);
             assert.deepStrictEqual(result, "João Magalhães,Gabriel Candal\n");
@@ -19,6 +19,31 @@ describe("csvMixin", () => {
             };
             const result = ripeCommons.buildCsv(input, headers);
             assert.deepStrictEqual(result, "name,title\nJoão Magalhães,mr\n");
+        });
+
+        it("should handle basic string arrays with numbers", () => {
+            const input = [1, "Gabriel Candal"];
+            const result = ripeCommons.buildCsv(input, []);
+            assert.deepStrictEqual(result, "1,Gabriel Candal\n");
+        });
+
+        it("should handle string arrays with numbers", () => {
+            const headers = [1, 2];
+            const input = [
+                [1, 2],
+            ];
+            const result = ripeCommons.buildCsv(input, headers);
+            assert.deepStrictEqual(result, '1,2\n1,2\n');
+        });
+
+        it("should handle objects with numbers", () => {
+            const headers = ["name", "number"];
+            const input = {
+                name: "João Magalhães",
+                number: 1
+            };
+            const result = ripeCommons.buildCsv(input, headers);
+            assert.deepStrictEqual(result, "name,number\nJoão Magalhães,1\n");
         });
 
         it("should handle custom delimiters", () => {

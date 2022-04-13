@@ -34,7 +34,7 @@ export const buildCsv = (data, headers = [], delimiter = ",") => {
         return csv + _objectToCsv(data, headers, delimiter);
     }
     // is simple array
-    if (typeof data[0] === "string") return csv + _arrayToCsv(data, delimiter);
+    if (typeof data[0] !== "object") return csv + _arrayToCsv(data, delimiter);
     if (Object.keys(data).length === 0) return "";
 
     for (let i = 0; i < Object.keys(data).length; i++) {
