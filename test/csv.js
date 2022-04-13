@@ -3,7 +3,7 @@ global.window = global;
 const assert = require("assert");
 const ripeCommons = require("..");
 
-describe("csvMixin", () => {
+describe("CSV", () => {
     describe("#buildCsv", () => {
         it("should handle basic string arrays", () => {
             const input = ["João Magalhães", "Gabriel Candal"];
