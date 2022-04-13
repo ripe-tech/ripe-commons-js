@@ -117,6 +117,12 @@ describe("csvMixin", () => {
             assert.deepStrictEqual(result, "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n");
         });
 
+        it("should handle nested array of strings", () => {
+            const input = [["a", ["b", ["c", "d"]]]];
+            const result = ripeCommons.buildCsv(input);
+            assert.deepStrictEqual(result, 'a,"b,c,d"\n');
+        });
+
         it("should handle array of strings with commas", () => {
             const headers = ["name", "title"];
             const input = [
@@ -140,6 +146,17 @@ describe("csvMixin", () => {
             ];
             const result = ripeCommons.buildCsv(input);
             assert.deepStrictEqual(result, "João Magalhães,mr\nGabriel Candal,mr\n");
+        });
+
+        it("should handle objects with lists", () => {
+            const input = [
+                {
+                    name: "João Magalhães",
+                    title: ["mr", "cto"]
+                }
+            ];
+            const result = ripeCommons.buildCsv(input);
+            assert.deepStrictEqual(result, 'João Magalhães,"mr,cto"\n');
         });
 
         it("should handle array of strings without headers", () => {

@@ -33,6 +33,7 @@ export const buildCsv = (data, headers = [], delimiter = ",") => {
     if (!Array.isArray(data)) {
         return csv + _objectToCsv(data, headers, delimiter);
     }
+
     // is simple array
     if (typeof data[0] !== "object") return csv + _arrayToCsv(data, delimiter);
     if (Object.keys(data).length === 0) return "";
@@ -70,6 +71,7 @@ export const _objectToCsv = (data, headers, delimiter = ",") => {
             csv += _parseStringComma(data[fields[j]], delimiter) + delimiter;
         } else csv += ",";
     }
+
     return csv.slice(0, -1) + "\n";
 };
 
