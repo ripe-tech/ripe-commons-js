@@ -65,9 +65,15 @@ export const _objectToCsv = (data, headers, delimiter = ",") => {
     let fields = headers;
     if (Object.keys(headers).length === 0) fields = Object.keys(data);
 
-    return fields.map(field => {
-        return data[field] === null || data[field] === undefined ? "" :  _parseStringDelimiter(data[field], delimiter)
-    }).join(delimiter) + "\n";
+    return (
+        fields
+            .map(field => {
+                return data[field] === null || data[field] === undefined
+                    ? ""
+                    : _parseStringDelimiter(data[field], delimiter);
+            })
+            .join(delimiter) + "\n"
+    );
 };
 
 /**
