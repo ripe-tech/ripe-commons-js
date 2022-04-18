@@ -64,15 +64,10 @@ export const buildCsv = (data, headers = [], delimiter = ",") => {
 export const _objectToCsv = (data, headers, delimiter = ",") => {
     let fields = headers;
     if (Object.keys(headers).length === 0) fields = Object.keys(data);
-    let csv = "";
 
-    for (let j = 0; j < fields.length; j++) {
-        if (data[fields[j]] !== null) {
-            csv += _parseStringComma(data[fields[j]], delimiter) + delimiter;
-        } else csv += ",";
-    }
-
-    return csv.slice(0, -1) + "\n";
+    return fields.map(field => {
+        return data[field] === null || data[field] === undefined ? "" :  _parseStringDelimiter(data[field], delimiter)
+    }).join(delimiter) + "\n";
 };
 
 /**
@@ -83,11 +78,7 @@ export const _objectToCsv = (data, headers, delimiter = ",") => {
  * @returns A string of the converted array.
  */
 export const _arrayToCsv = (data, delimiter = ",") => {
-    let csv = "";
-    for (let j = 0; j < data.length; j++) {
-        csv += _parseStringComma(data[j], delimiter) + delimiter;
-    }
-    return csv.slice(0, -1) + "\n";
+    return data.map(x => _parseStringDelimiter(x, delimiter)).join(delimiter) + "\n";
 };
 
 export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
@@ -209,7 +200,7 @@ export const _toObject = data => {
     return objects;
 };
 
-export const _parseStringComma = (value, delimiter = ",") => {
+export const _parseStringDelimiter = (value, delimiter = ",") => {
     if (String(value).includes(delimiter)) {
         return '"' + String(value).replace(/["']/g, "") + '"';
     }
