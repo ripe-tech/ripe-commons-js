@@ -62,16 +62,15 @@ export const buildCsv = (data, headers = [], delimiter = ",") => {
  * @returns A string of the converted object.
  */
 export const _objectToCsv = (data, headers, delimiter = ",") => {
-    let fields = headers;
-    if (Object.keys(headers).length === 0) fields = Object.keys(data);
+    const fields = Object.keys(headers).length === 0 ? Object.keys(data) : headers;
 
     return (
         fields
-            .map(field => {
-                return data[field] === null || data[field] === undefined
+            .map(field =>
+                data[field] === null || data[field] === undefined
                     ? ""
-                    : _parseStringDelimiter(data[field], delimiter);
-            })
+                    : _parseStringDelimiter(data[field], delimiter)
+            )
             .join(delimiter) + "\n"
     );
 };
@@ -101,8 +100,7 @@ export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ","
 
     const data = dataS.split("\n").map(row => row.split(delimiter));
 
-    if (!object) return data;
-    return _toObject(data);
+    return object ? _toObject(data) : data;
 };
 
 export const parseCsvComplex = (dataS, object = false, sanitize = true, delimiter = ",") => {
