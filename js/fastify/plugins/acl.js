@@ -2,7 +2,7 @@ import fp from "fastify-plugin";
 
 import { getRipeAuth } from "../../auth";
 
-export const acl =
+export const aclFastify =
     (options = {}) =>
     (req, res, next) => {
         req.getAcl = async ctx => {
@@ -18,6 +18,8 @@ export const acl =
 
         next();
     };
+
+export const acl = aclFastify;
 
 const aclPlugin = async (app, options) => {
     app.addHook("onRequest", acl(options));

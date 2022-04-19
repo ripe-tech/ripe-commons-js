@@ -17,6 +17,14 @@ type Options = FastifyPluginOptions & {
     skipAcl?: string[];
 };
 
+export declare function aclFastify(
+    options?: Options
+): (
+    req: FastifyRequest,
+    res: FastifyReply,
+    next: HookHandlerDoneFunction
+) => preValidationHookHandler | void;
+
 export declare function acl(
     options?: Options
 ): (
