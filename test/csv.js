@@ -1,10 +1,10 @@
 const assert = require("assert");
-const mixins = require("../../mixins");
+const ripeCommons = require("..");
 
-describe("csvMixin", () => {
-    describe("#_parseCsv", () => {
+describe("CSV", () => {
+    describe("#parseCsv", () => {
         it("should allow simple CSV parsing", () => {
-            const result = mixins.csvMixin.methods._parseCsv(
+            const result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n"
             );
             assert.deepStrictEqual(result, [
@@ -15,7 +15,7 @@ describe("csvMixin", () => {
         });
 
         it("should allow simple CSV object parsing", () => {
-            const result = mixins.csvMixin.methods._parseCsv(
+            const result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n",
                 true
             );
@@ -25,10 +25,10 @@ describe("csvMixin", () => {
             ]);
         });
 
-        it("controls extra elements in line", () => {
+        it("should handle extra elements in line", () => {
             let result;
 
-            result = mixins.csvMixin.methods._parseCsv(
+            result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
                 true
             );
@@ -37,7 +37,7 @@ describe("csvMixin", () => {
                 { name: "Gabriel Candal", title: "mr" }
             ]);
 
-            result = mixins.csvMixin.methods._parseCsv(
+            result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
                 true,
                 false
@@ -52,7 +52,7 @@ describe("csvMixin", () => {
 
     describe("#_parseCsvComplex", () => {
         it("should allow simple CSV parsing", () => {
-            const result = mixins.csvMixin.methods._parseCsvComplex(
+            const result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n"
             );
             assert.deepStrictEqual(result, [
@@ -63,7 +63,7 @@ describe("csvMixin", () => {
         });
 
         it("should allow simple CSV object parsing", () => {
-            const result = mixins.csvMixin.methods._parseCsvComplex(
+            const result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n",
                 true
             );
@@ -74,7 +74,7 @@ describe("csvMixin", () => {
         });
 
         it("should allow complex CSV object parsing", () => {
-            const result = mixins.csvMixin.methods._parseCsvComplex(
+            const result = ripeCommons._parseCsvComplex(
                 'name,title\n"João,{Maga""lhães}",mr\nGabriel Candal,mr\n',
                 true
             );
@@ -84,10 +84,10 @@ describe("csvMixin", () => {
             ]);
         });
 
-        it("controls extra elements in line", () => {
+        it("should handle extra elements in line", () => {
             let result;
 
-            result = mixins.csvMixin.methods._parseCsvComplex(
+            result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
                 true
             );
@@ -96,7 +96,7 @@ describe("csvMixin", () => {
                 { name: "Gabriel Candal", title: "mr" }
             ]);
 
-            result = mixins.csvMixin.methods._parseCsvComplex(
+            result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
                 true,
                 false

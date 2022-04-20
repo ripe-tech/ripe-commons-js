@@ -6,7 +6,7 @@
  * CSV parsing operation.
  */
 export const readCsv = (file, parser = null) => {
-    parser = parser || this._parseCsvComplex;
+    parser = parser || _parseCsvComplex;
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = e => resolve(parser(e.target.result));
@@ -23,10 +23,10 @@ export const readCsv = (file, parser = null) => {
  * @param {Array} headers List of headers for the CSV file.
  */
 export const buildCsv = (data, headers = []) => {
-    return [headers, ...data].map(row => row.map(r => this._toString(r)).join(",")).join("\n");
+    return [headers, ...data].map(row => row.map(r => _toString(r)).join(",")).join("\n");
 };
 
-export const _parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
+export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
     // in case the sanitize operation has been required runs a pre-operation
     // to make sure no extra information exist at the end of the lines and
     // that only the valid lines are taken into account
@@ -41,7 +41,7 @@ export const _parseCsv = (dataS, object = false, sanitize = true, delimiter = ",
     const data = dataS.split("\n").map(row => row.split(delimiter));
 
     if (!object) return data;
-    return this._toObject(data);
+    return _toObject(data);
 };
 
 export const _parseCsvComplex = (dataS, object = false, sanitize = true, delimiter = ",") => {
@@ -118,7 +118,7 @@ export const _parseCsvComplex = (dataS, object = false, sanitize = true, delimit
     }
 
     if (!object) return data;
-    return this._toObject(data);
+    return _toObject(data);
 };
 
 /**
@@ -154,7 +154,7 @@ export const _toObject = data => {
  * @returns {String} The stringified cell value
  */
 export const _toString = value => {
-    if (Array.isArray(value)) return `"${value.map(v => this._toString(v)).join(",,")}"`;
+    if (Array.isArray(value)) return `"${value.map(v => _toString(v)).join(",,")}"`;
     if (typeof value === "object") {
         return `"${JSON.stringify(value).replaceAll('"', '""')}"`;
     }
