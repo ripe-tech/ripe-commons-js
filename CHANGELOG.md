@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Refactored the ACL function out of the fastify module to be used by express as well - [ripe-orchestra/#16](https://github.com/ripe-tech/ripe-orchestra/issues/16)
+* Refactored the CSV methods to allow for conversion of objects and list of objects to CSV - [ripe-pulse/#302](https://github.com/ripe-tech/ripe-pulse/issues/302)
 
 ### Fixed
 
