@@ -5,7 +5,7 @@
  * @param {Function} parser The function to be used in the
  * CSV parsing operation.
  */
-export const readCsv = (file, parser = null) => {
+export const parseCsvFile = (file, parser = null) => {
     parser = parser || _parseCsvComplex;
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -16,14 +16,60 @@ export const readCsv = (file, parser = null) => {
 };
 
 /**
- * Creates the contents of the CSV file with the data given
- * as an array of rows and the headers.
+ * Converts an list of arrays into a CSV.
  *
- * @param {Array} data Array of rows with cell data.
- * @param {Array} headers List of headers for the CSV file.
+ * @param {Object} data The array list to be converted.
+ * @param {Array} headers THe headers for the list.
+ * @param {String} delimiter The delimiter for the cell separation.
+ * @returns A string of the converted array list.
  */
-export const buildCsv = (data, headers = []) => {
-    return [headers, ...data].map(row => row.map(r => _toString(r)).join(",")).join("\n");
+export const arrayListToCsv = (data, headers = [], delimiter = ",") => {
+    const d = headers.length !== 0 ? [headers, ...data] : data;
+    return d.map(row => arrayToCsv(row, delimiter)).join("\n");
+};
+
+/**
+ * Converts an array into a CSV.
+ *
+ * @param {Object} data The array to be converted.
+ * @param {String} delimiter The delimiter for cell separation.
+ * @returns A string of the converted array.
+ */
+export const arrayToCsv = (data, delimiter = ",") => {
+    return data.map(entry => _parseStringDelimiter(entry, delimiter)).join(delimiter);
+};
+
+/**
+ * Converts an object list into a CSV line.
+ *
+ * @param {Object} data The source list of objects.
+ * @param {Array} headers The fields of the objects to include. If
+ * none are passed, the keys of the first object will be used.
+ * @param {String} delimiter The delimiter for cell separation.
+ * @returns {String} a string representing the Object List in CSV format.
+ */
+export const objectListToCsv = (data, headers = [], delimiter = ",") => {
+    const fields = Object.keys(headers).length === 0 ? Object.keys(data[0]) : headers;
+    if (fields.length === 0) return "";
+
+    const headersString = Object.keys(headers).length === 0 ? "" : arrayToCsv(headers) + "\n";
+    return headersString + data.map(object => objectToCsv(object, fields, delimiter)).join("\n");
+};
+
+/**
+ * Converts an object into a CSV line.
+ *
+ * @param {Object} data The source object.
+ * @param {Array} headers The fields of the objects to include. If
+ * none are passed, the keys of the first object will be used.
+ * @param {String} delimiter The delimiter for cell separation.
+ * @returns {String} a string representing the Object as a CSV.
+ */
+export const objectToCsv = (data, headers = [], delimiter = ",") => {
+    const fields = Object.keys(headers).length === 0 ? Object.keys(data) : headers;
+    if (fields.length === 0) return "";
+
+    return fields.map(x => _parseStringDelimiter(data[x], delimiter)).join(delimiter);
 };
 
 export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ",") => {
@@ -40,8 +86,7 @@ export const parseCsv = (dataS, object = false, sanitize = true, delimiter = ","
 
     const data = dataS.split("\n").map(row => row.split(delimiter));
 
-    if (!object) return data;
-    return _toObject(data);
+    return object ? _toObject(data) : data;
 };
 
 export const _parseCsvComplex = (dataS, object = false, sanitize = true, delimiter = ",") => {
@@ -117,13 +162,12 @@ export const _parseCsvComplex = (dataS, object = false, sanitize = true, delimit
         data[data.length - 1].push(value);
     }
 
-    if (!object) return data;
-    return _toObject(data);
+    return object ? _toObject(data) : data;
 };
 
 /**
  * Converts a sequence of parsed data items into a sequence of
- * object like items structured according to the CVS.
+ * object like items structured according to the CSV.
  *
  * @param {Array} data The array of data items defined as sequences
  * of data items, the first element should be the header.
@@ -136,27 +180,24 @@ export const _toObject = data => {
     const items = data.slice(1);
     for (const item of items) {
         const object = {};
-        objects.push(object);
         for (let index = 0; index < header.length; index++) {
             const key = header[index];
             const value = item[index];
             object[key] = value;
         }
+        objects.push(object);
     }
     return objects;
 };
 
 /**
- * Converts a cell value to a string using the appropriate
- * conversion method.
- *
- * @param {Array|Number|Object|String} value The cell value to convert to string.
- * @returns {String} The stringified cell value
+ * Parses a string to ensure it doesn't contain the delimiter.
+ * @param {*} value The value to be parsed.
+ * @param {*} delimiter The delimiter to be checked.
+ * @returns the escaped value.
  */
-export const _toString = value => {
-    if (Array.isArray(value)) return `"${value.map(v => _toString(v)).join(",,")}"`;
-    if (typeof value === "object") {
-        return `"${JSON.stringify(value).replaceAll('"', '""')}"`;
-    }
-    return value ? value.toString() : "";
+export const _parseStringDelimiter = (value, delimiter = ",") => {
+    if (value === undefined || value === null) return "";
+    if (!String(value).includes(delimiter)) return value;
+    return '"' + String(value).replace(/["']/g, '"') + '"';
 };
