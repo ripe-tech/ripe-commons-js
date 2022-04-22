@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* Extracted CSV functions from `ripe-util-vue` - [ripe-pulse/#302](https://github.com/ripe-tech/ripe-pulse/issues/302)
 * Express middleware not found and error handlers - [ripe-orchestra/#16](https://github.com/ripe-tech/ripe-orchestra/issues/16)
 
 ### Changed
