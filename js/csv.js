@@ -19,7 +19,8 @@ export const buildCsv = (data, headers = [], options = {}) => {
 };
 
 /**
- * Parses a CSV file and returns a table with the data.
+ * Parses a CSV file and returns a sequence of arrays
+ * containing the multiple lines of data (table).
  *
  * @param {Blob|File} file The file object that is going
  * to be read and have its contents parsed as CSV.
@@ -183,10 +184,12 @@ const _toObject = data => {
 
 /**
  * Converts a cell value to a string using the appropriate
- * conversion method.
+ * serialization method according to data type.
  *
- * @param {Array|Number|Object|String} value The cell value to convert to string.
- * @returns {String} The stringified cell value
+ * @param {Array|Number|Object|String} value The cell value to
+ * convert to string.
+ * @returns {String} The stringified cell value that makes use
+ * of the standard serialization strategy for CSV.
  */
 const _toString = value => {
     if (Array.isArray(value)) return `"${value.map(v => _toString(v)).join(",,")}"`;
