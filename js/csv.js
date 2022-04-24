@@ -10,12 +10,22 @@
  * structure of arrays.
  */
 export const buildCsv = (data, headers = [], options = {}) => {
-    const { newline, delimiter } = {
-        newline: "\n",
+    const { delimiter, eol, useHeaders } = {
         delimiter: ",",
+        eol: "\n",
+        useHeaders: true,
         ...options
     };
-    return [headers, ...data].map(row => row.map(r => _toString(r)).join(delimiter)).join(newline);
+    data = useHeaders ? [headers, ...data] : data;
+    return data.map(row => row.map(r => _toString(r, delimiter)).join(delimiter)).join(eol);
+};
+
+export const arraysToCsv = (data, headers = [], options = {}) => {
+    return buildCsv(data, headers, options);
+};
+
+export const arrayToCsv = (data, headers = [], options = {}) => {
+    return arraysToCsv([data], headers, options);
 };
 
 export const objectsToCsv = (data, headers = [], options = {}) => {
@@ -25,6 +35,10 @@ export const objectsToCsv = (data, headers = [], options = {}) => {
             : headers;
     const dataArray = data.map(d => headers.map(h => d[h]));
     return buildCsv(dataArray, headers, options);
+};
+
+export const objectToCsv = (data, headers = [], options = {}) => {
+    return objectsToCsv([data], headers, options);
 };
 
 /**
@@ -56,10 +70,11 @@ export const parseCsv = (dataS, options = {}) => {
 export const _parseCsvSimple = (dataS, options = {}) => {
     // builds the default options sequence, which is going to be used in
     // to control the way the parsing operation is going to be performed
-    const { object, sanitize, delimiter } = {
+    const { object, sanitize, delimiter, eol } = {
         object: false,
         sanitize: true,
         delimiter: ",",
+        eol: "\n",
         ...options
     };
 
@@ -68,13 +83,13 @@ export const _parseCsvSimple = (dataS, options = {}) => {
     // that only the valid lines are taken into account
     if (sanitize) {
         dataS = dataS
-            .split("\n")
+            .split(eol)
             .filter(row => Boolean(row))
             .map(row => row.trim())
-            .join("\n");
+            .join(eol);
     }
 
-    const data = dataS.split("\n").map(row => row.split(delimiter));
+    const data = dataS.split(eol).map(row => row.split(delimiter));
 
     if (!object) return data;
     return _toObject(data);
@@ -83,10 +98,11 @@ export const _parseCsvSimple = (dataS, options = {}) => {
 export const _parseCsvComplex = (dataS, options = {}) => {
     // builds the default options sequence, which is going to be used in
     // to control the way the parsing operation is going to be performed
-    const { object, sanitize, delimiter } = {
+    const { object, sanitize, delimiter, eol } = {
         object: false,
         sanitize: true,
         delimiter: ",",
+        eol: "\n",
         ...options
     };
 
@@ -95,10 +111,10 @@ export const _parseCsvComplex = (dataS, options = {}) => {
     // that only the valid lines are taken into account
     if (sanitize) {
         dataS = dataS
-            .split("\n")
+            .split(eol)
             .filter(row => Boolean(row))
             .map(row => row.trim())
-            .join("\n");
+            .join(eol);
     }
 
     // builds the custom pattern that is going to try to
@@ -197,13 +213,29 @@ const _toObject = data => {
  *
  * @param {Array|Number|Object|String} value The cell value to
  * convert to string.
+ * @param {String} delimiter The delimiter value that is in
+ * use under the current CSV operation.
+ * @param {Object} options The options that are going to be used
+ * to control the way the string is going to be quoted.
  * @returns {String} The stringified cell value that makes use
  * of the standard serialization strategy for CSV.
  */
-const _toString = value => {
-    if (Array.isArray(value)) return `"${value.map(v => _toString(v)).join(",,")}"`;
-    if (typeof value === "object") {
-        return `"${JSON.stringify(value).replaceAll('"', '""')}"`;
+const _toString = (value, delimiter = ",", { quoteDelimiter } = { quoteDelimiter: false }) => {
+    let valueS = _serialize(value);
+    const isSpecial = valueS.includes('"') || valueS.includes(delimiter);
+    valueS = valueS.replace(/"/g, '""');
+    if (quoteDelimiter) {
+        valueS = valueS.replace(new RegExp(delimiter, "g"), `${delimiter}${delimiter}`);
     }
-    return value ? value.toString() : "";
+    return isSpecial ? `"${valueS}"` : valueS;
+};
+
+const _serialize = value => {
+    if (Array.isArray(value)) {
+        return value.map(v => _serialize(v)).join(",");
+    }
+    if (typeof value === "object") {
+        return JSON.stringify(value);
+    }
+    return String(value);
 };

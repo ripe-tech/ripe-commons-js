@@ -13,6 +13,53 @@ describe("CSV", () => {
             );
             assert.strictEqual(result, "name,title\nJoão Magalhães,mr\nGabriel Candal,mr");
         });
+
+        it("should handle elements with commas", () => {
+            const result = ripeCommons.buildCsv(
+                [
+                    ["Magalhães, João", "mr"],
+                    ["Candal, Gabriel", "mr"]
+                ],
+                ["name", "title"]
+            );
+            assert.strictEqual(result, 'name,title\n"Magalhães, João",mr\n"Candal, Gabriel",mr');
+        });
+
+        it("should handle elements with commas and quotes", () => {
+            const result = ripeCommons.buildCsv(
+                [
+                    ['Magalhães, João"', "mr"],
+                    ['Candal, Gabriel"', "mr"]
+                ],
+                ["name", "title"]
+            );
+            assert.strictEqual(
+                result,
+                'name,title\n"Magalhães, João""",mr\n"Candal, Gabriel""",mr'
+            );
+        });
+    });
+
+    describe("#arraysToCsv", () => {
+        it("should allow simple CSV building", () => {
+            const result = ripeCommons.arraysToCsv(
+                [
+                    ["João Magalhães", "mr"],
+                    ["Gabriel Candal", "mr"]
+                ],
+                ["name", "title"]
+            );
+            assert.strictEqual(result, "name,title\nJoão Magalhães,mr\nGabriel Candal,mr");
+        });
+    });
+
+    describe("#arrayToCsv", () => {
+        it("should allow simple CSV building", () => {
+            const result = ripeCommons.arrayToCsv(["João, Magalhães", "mr"], undefined, {
+                useHeaders: false
+            });
+            assert.deepStrictEqual(result, '"João, Magalhães",mr');
+        });
     });
 
     describe("#objectsToCsv", () => {
@@ -33,6 +80,17 @@ describe("CSV", () => {
                 { name: "Gabriel Candal", title: "mr" }
             ]);
             assert.strictEqual(result, "name,title\nJoão Magalhães,mr\nGabriel Candal,mr");
+        });
+    });
+
+    describe("#objectToCsv", () => {
+        it("should allow simple CSV building", () => {
+            const result = ripeCommons.objectToCsv(
+                { name: "João, Magalhães", title: "mr" },
+                undefined,
+                { useHeaders: false }
+            );
+            assert.deepStrictEqual(result, '"João, Magalhães",mr');
         });
     });
 
