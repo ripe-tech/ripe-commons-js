@@ -18,6 +18,15 @@ export const buildCsv = (data, headers = [], options = {}) => {
     return [headers, ...data].map(row => row.map(r => _toString(r)).join(delimiter)).join(newline);
 };
 
+export const objectsToCsv = (data, headers = [], options = {}) => {
+    headers =
+        Object.keys(headers).length === 0 && data.length > 0
+            ? Object.keys(data[0]).sort()
+            : headers;
+    const dataArray = data.map(d => headers.map(h => d[h]));
+    return buildCsv(dataArray, headers, options);
+};
+
 /**
  * Parses a CSV file and returns a sequence of arrays
  * containing the multiple lines of data (table).
