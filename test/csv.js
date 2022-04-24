@@ -17,7 +17,7 @@ describe("CSV", () => {
         it("should allow simple CSV object parsing", () => {
             const result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n",
-                true
+                { object: true }
             );
             assert.deepStrictEqual(result, [
                 { name: "João Magalhães", title: "mr" },
@@ -30,7 +30,7 @@ describe("CSV", () => {
 
             result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
-                true
+                { object: true }
             );
             assert.deepStrictEqual(result, [
                 { name: "João Magalhães", title: "mr" },
@@ -39,8 +39,7 @@ describe("CSV", () => {
 
             result = ripeCommons.parseCsv(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
-                true,
-                false
+                { object: true, sanitize: false }
             );
             assert.deepStrictEqual(result, [
                 { name: "João Magalhães", title: "mr " },
@@ -65,7 +64,7 @@ describe("CSV", () => {
         it("should allow simple CSV object parsing", () => {
             const result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr\n",
-                true
+                { object: true }
             );
             assert.deepStrictEqual(result, [
                 { name: "João Magalhães", title: "mr" },
@@ -76,7 +75,7 @@ describe("CSV", () => {
         it("should allow complex CSV object parsing", () => {
             const result = ripeCommons._parseCsvComplex(
                 'name,title\n"João,{Maga""lhães}",mr\nGabriel Candal,mr\n',
-                true
+                { object: true }
             );
             assert.deepStrictEqual(result, [
                 { name: 'João,{Maga"lhães}', title: "mr" },
@@ -89,7 +88,7 @@ describe("CSV", () => {
 
             result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
-                true
+                { object: true }
             );
             assert.deepStrictEqual(result, [
                 { name: "João Magalhães", title: "mr" },
@@ -98,8 +97,7 @@ describe("CSV", () => {
 
             result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr \nGabriel Candal,mr   \n",
-                true,
-                false
+                { object: true, sanitize: false }
             );
             assert.deepStrictEqual(result, [
                 { name: "João Magalhães", title: "mr " },
