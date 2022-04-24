@@ -20,6 +20,8 @@ export const buildCsv = (data, headers = [], options = {}) => {
     return data.map(row => row.map(r => _toString(r, delimiter)).join(delimiter)).join(eol);
 };
 
+export const dumpsCsv = buildCsv;
+
 export const arraysToCsv = (data, headers = [], options = {}) => {
     return buildCsv(data, headers, options);
 };
@@ -66,6 +68,8 @@ export const parseCsv = (dataS, options = {}) => {
     const parser = options.parser || _parseCsvComplex;
     return parser(dataS, options);
 };
+
+export const loadsCsv = parseCsv;
 
 export const _parseCsvSimple = (dataS, options = {}) => {
     // builds the default options sequence, which is going to be used in

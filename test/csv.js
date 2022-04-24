@@ -40,6 +40,12 @@ describe("CSV", () => {
         });
     });
 
+    describe("#dumpsCsv", () => {
+        it("should be equivalent to buildCsv()", () => {
+            assert.strictEqual(ripeCommons.dumpsCsv, ripeCommons.buildCsv);
+        });
+    });
+
     describe("#arraysToCsv", () => {
         it("should allow simple CSV building", () => {
             const result = ripeCommons.arraysToCsv(
@@ -135,6 +141,12 @@ describe("CSV", () => {
                 { name: "Gabriel Candal", title: "mr   " },
                 { name: "", title: undefined }
             ]);
+        });
+    });
+
+    describe("#loadsCsv", () => {
+        it("should be equivalent to parseCsv()", () => {
+            assert.strictEqual(ripeCommons.loadsCsv, ripeCommons.parseCsv);
         });
     });
 
