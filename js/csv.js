@@ -224,14 +224,18 @@ const _toObject = data => {
  * @returns {String} The stringified cell value that makes use
  * of the standard serialization strategy for CSV.
  */
-const _toString = (value, delimiter = ",", { quoteDelimiter } = { quoteDelimiter: false }) => {
-    let valueS = _serialize(value);
-    const isSpecial = valueS.includes('"') || valueS.includes(delimiter);
-    valueS = valueS.replace(/"/g, '""');
-    if (quoteDelimiter) {
-        valueS = valueS.replace(new RegExp(delimiter, "g"), `${delimiter}${delimiter}`);
+const _toString = (
+    value,
+    delimiter = ",",
+    { serialize, escape, quoteDelimiter } = {
+        serialize: true,
+        escape: true,
+        quoteDelimiter: false
     }
-    return isSpecial ? `"${valueS}"` : valueS;
+) => {
+    let valueS = serialize ? _serialize(value) : String(value);
+    valueS = escape ? _escape(valueS, delimiter, quoteDelimiter) : valueS;
+    return valueS;
 };
 
 const _serialize = value => {
@@ -242,4 +246,13 @@ const _serialize = value => {
         return JSON.stringify(value);
     }
     return String(value);
+};
+
+const _escape = (value, delimiter = ",", quoteDelimiter = false) => {
+    const isSpecial = value.includes('"') || value.includes(delimiter);
+    value = value.replace(/"/g, '""');
+    if (quoteDelimiter) {
+        value = value.replace(new RegExp(delimiter, "g"), `${delimiter}${delimiter}`);
+    }
+    return isSpecial ? `"${value}"` : value;
 };
