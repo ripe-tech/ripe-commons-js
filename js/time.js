@@ -68,4 +68,36 @@ export const timeStringUTC = (
     return buffer.join(separator);
 };
 
+export const dateTimeString = (
+    timestamp = null,
+    separator = "_",
+    dateSeparator = "/",
+    timeSeparator = ":",
+    { year = true, month = true, day = true, hours = true, minutes = true, seconds = true } = {}
+) => {
+    const dateS = dateString(timestamp, dateSeparator, { year: year, month: month, day: day });
+    const timeS = timeString(timestamp, timeSeparator, {
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    });
+    return `${dateS}${separator}${timeS}`;
+};
+
+export const dateTimeStringUTC = (
+    timestamp = null,
+    separator = "_",
+    dateSeparator = "/",
+    timeSeparator = ":",
+    { year = true, month = true, day = true, hours = true, minutes = true, seconds = true } = {}
+) => {
+    const dateS = dateStringUTC(timestamp, dateSeparator, { year: year, month: month, day: day });
+    const timeS = timeStringUTC(timestamp, timeSeparator, {
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    });
+    return `${dateS}${separator}${timeS}`;
+};
+
 export default dateString;
