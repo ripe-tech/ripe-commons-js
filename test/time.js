@@ -26,6 +26,30 @@ describe("Time", function() {
         });
     });
 
+    describe("#timeString()", function() {
+        it("should format simple time strings", () => {
+            const result = ripeCommons.timeString(new Date("10/12/2020 12:20:00") / 1000);
+            assert.deepStrictEqual(result, "12:20:00");
+        });
+
+        it("should format current time values", () => {
+            const result = ripeCommons.timeString();
+            assert.deepStrictEqual(typeof result, "string");
+        });
+    });
+
+    describe("#timeStringUTC()", function() {
+        it("should format simple date time strings", () => {
+            const result = ripeCommons.timeStringUTC(new Date("10/12/2020 12:20:00Z") / 1000);
+            assert.deepStrictEqual(result, "12:20:00");
+        });
+
+        it("should format current date time values", () => {
+            const result = ripeCommons.timeStringUTC();
+            assert.deepStrictEqual(typeof result, "string");
+        });
+    });
+
     describe("#dateTimeString()", function() {
         it("should format simple date time strings", () => {
             const result = ripeCommons.dateTimeString(new Date("10/12/2020") / 1000);
