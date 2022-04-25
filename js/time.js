@@ -1,8 +1,9 @@
 export const dateString = (
-    timestamp,
+    timestamp = null,
     separator = "/",
     { year = true, month = true, day = true } = {}
 ) => {
+    timestamp = timestamp === null ? new Date() / 1000 : timestamp;
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const dayV = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
@@ -16,10 +17,11 @@ export const dateString = (
 };
 
 export const dateStringUTC = (
-    timestamp,
+    timestamp = null,
     separator = "/",
     { year = true, month = true, day = true } = {}
 ) => {
+    timestamp = timestamp === null ? new Date() / 1000 : timestamp;
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const dayV = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
@@ -33,10 +35,11 @@ export const dateStringUTC = (
 };
 
 export const timeString = (
-    timestamp,
+    timestamp = null,
     separator = ":",
     { hours = true, minutes = true, seconds = true } = {}
 ) => {
+    timestamp = timestamp === null ? new Date() / 1000 : timestamp;
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const hoursV = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
@@ -49,10 +52,11 @@ export const timeString = (
 };
 
 export const timeStringUTC = (
-    timestamp,
+    timestamp = null,
     separator = ":",
     { hours = true, minutes = true, seconds = true } = {}
 ) => {
+    timestamp = timestamp === null ? new Date() / 1000 : timestamp;
     const buffer = [];
     const date = new Date(timestamp * 1000);
     const hoursV = date.getUTCHours() < 10 ? `0${date.getUTCHours()}` : date.getUTCHours();
