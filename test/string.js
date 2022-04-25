@@ -2,7 +2,7 @@ const assert = require("assert");
 const ripeCommons = require("..");
 
 describe("String", function() {
-    describe("#breakString", function() {
+    describe("#breakString()", function() {
         it("should not break if it fits in a single line", () => {
             const lines = ripeCommons.breakString("Small Address Line", 35, 3);
             assert.deepStrictEqual(lines, ["Small Address Line"]);

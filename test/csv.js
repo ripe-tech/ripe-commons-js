@@ -2,7 +2,7 @@ const assert = require("assert");
 const ripeCommons = require("..");
 
 describe("CSV", () => {
-    describe("#buildCsv", () => {
+    describe("#buildCsv()", () => {
         it("should allow simple CSV building", () => {
             const result = ripeCommons.buildCsv(
                 [
@@ -40,13 +40,13 @@ describe("CSV", () => {
         });
     });
 
-    describe("#dumpsCsv", () => {
+    describe("#dumpsCsv()", () => {
         it("should be equivalent to buildCsv()", () => {
             assert.strictEqual(ripeCommons.dumpsCsv, ripeCommons.buildCsv);
         });
     });
 
-    describe("#arraysToCsv", () => {
+    describe("#arraysToCsv()", () => {
         it("should allow simple CSV building", () => {
             const result = ripeCommons.arraysToCsv(
                 [
@@ -59,7 +59,7 @@ describe("CSV", () => {
         });
     });
 
-    describe("#arrayToCsv", () => {
+    describe("#arrayToCsv()", () => {
         it("should allow simple CSV building", () => {
             const result = ripeCommons.arrayToCsv(["João, Magalhães", "mr"], undefined, {
                 useHeaders: false
@@ -68,7 +68,7 @@ describe("CSV", () => {
         });
     });
 
-    describe("#objectsToCsv", () => {
+    describe("#objectsToCsv()", () => {
         it("should allow simple CSV building", () => {
             const result = ripeCommons.objectsToCsv(
                 [
@@ -89,7 +89,7 @@ describe("CSV", () => {
         });
     });
 
-    describe("#objectToCsv", () => {
+    describe("#objectToCsv()", () => {
         it("should allow simple CSV building", () => {
             const result = ripeCommons.objectToCsv(
                 { name: "João, Magalhães", title: "mr" },
@@ -100,7 +100,7 @@ describe("CSV", () => {
         });
     });
 
-    describe("#parseCsv", () => {
+    describe("#parseCsv()", () => {
         it("should allow simple CSV parsing", () => {
             const result = ripeCommons.parseCsv("name,title\nJoão Magalhães,mr\nGabriel Candal,mr");
             assert.deepStrictEqual(result, [
@@ -144,13 +144,13 @@ describe("CSV", () => {
         });
     });
 
-    describe("#loadsCsv", () => {
+    describe("#loadsCsv()", () => {
         it("should be equivalent to parseCsv()", () => {
             assert.strictEqual(ripeCommons.loadsCsv, ripeCommons.parseCsv);
         });
     });
 
-    describe("#_parseCsvComplex", () => {
+    describe("#_parseCsvComplex()", () => {
         it("should allow simple CSV parsing", () => {
             const result = ripeCommons._parseCsvComplex(
                 "name,title\nJoão Magalhães,mr\nGabriel Candal,mr"
