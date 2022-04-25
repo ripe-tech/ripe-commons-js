@@ -9,13 +9,11 @@
  * @returns {String} The generated CSV string from the provided
  * structure of arrays.
  */
-export const buildCsv = (data, headers = [], options = {}) => {
-    const { delimiter, eol, useHeaders } = {
-        delimiter: ",",
-        eol: "\n",
-        useHeaders: true,
-        ...options
-    };
+export const buildCsv = (
+    data,
+    headers = [],
+    { delimiter = ",", eol = "\n", useHeaders = true } = {}
+) => {
     data = useHeaders ? [headers, ...data] : data;
     return data.map(row => row.map(r => _toString(r, delimiter)).join(delimiter)).join(eol);
 };
@@ -71,17 +69,10 @@ export const parseCsv = (dataS, options = {}) => {
 
 export const loadsCsv = parseCsv;
 
-export const _parseCsvSimple = (dataS, options = {}) => {
-    // builds the default options sequence, which is going to be used in
-    // to control the way the parsing operation is going to be performed
-    const { object, sanitize, delimiter, eol } = {
-        object: false,
-        sanitize: true,
-        delimiter: ",",
-        eol: "\n",
-        ...options
-    };
-
+export const _parseCsvSimple = (
+    dataS,
+    { object = false, sanitize = true, delimiter = ",", eol = "\n" } = {}
+) => {
     // in case the sanitize operation has been requested runs a pre-operation
     // to make sure no extra information exist at the end of the lines and
     // that only the valid lines are taken into account
@@ -99,17 +90,10 @@ export const _parseCsvSimple = (dataS, options = {}) => {
     return _toObject(data);
 };
 
-export const _parseCsvComplex = (dataS, options = {}) => {
-    // builds the default options sequence, which is going to be used in
-    // to control the way the parsing operation is going to be performed
-    const { object, sanitize, delimiter, eol } = {
-        object: false,
-        sanitize: true,
-        delimiter: ",",
-        eol: "\n",
-        ...options
-    };
-
+export const _parseCsvComplex = (
+    dataS,
+    { object = false, sanitize = true, delimiter = ",", eol = "\n" } = {}
+) => {
     // in case the sanitize operation has been required runs a pre-operation
     // to make sure no extra information exist at the end of the lines and
     // that only the valid lines are taken into account
@@ -227,11 +211,7 @@ const _toObject = data => {
 const _toString = (
     value,
     delimiter = ",",
-    { serialize, escape, quoteDelimiter } = {
-        serialize: true,
-        escape: true,
-        quoteDelimiter: false
-    }
+    { serialize = true, escape = true, quoteDelimiter = false } = {}
 ) => {
     let valueS = serialize ? _serialize(value) : String(value);
     valueS = escape ? _escape(valueS, delimiter, quoteDelimiter) : valueS;
