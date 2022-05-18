@@ -76,6 +76,8 @@ describe("Handlers", function() {
             assert.strictEqual(errorResult.code, 500);
             assert.strictEqual(errorResult.error, "Error");
             assert.strictEqual(errorResult.stack, undefined);
+
+            process.env.NODE_ENV = "development";
         });
     });
 });
