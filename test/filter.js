@@ -84,6 +84,296 @@ describe("Filter", function() {
             });
         });
 
+        it("should be able to build a filter string to filter by keyword @yesterday", () => {
+            const options = {
+                filter: "@yesterday",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: [
+                    "@today",
+                    "@yesterday",
+                    "@tomorrow",
+                    "@this-week",
+                    "@next-week",
+                    "@this-month",
+                    "@next-month"
+                ]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate() - 1);
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gte:${yesterday.getTime() / 1000}`,
+                    `created:lt:${today.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should be able to build a filter string to filter by keyword @tomorrow", () => {
+            const options = {
+                filter: "@tomorrow",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: [
+                    "@today",
+                    "@yesterday",
+                    "@tomorrow",
+                    "@this-week",
+                    "@next-week",
+                    "@this-month",
+                    "@next-month"
+                ]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const tomorrow = new Date(today.setDate(today.getDate() + 1));
+            const afterTomorrow = new Date(today.setDate(today.getDate() + 1));
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gte:${tomorrow.getTime() / 1000}`,
+                    `created:lt:${afterTomorrow.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should be able to build a filter string to filter by keyword @this-week", () => {
+            const options = {
+                filter: "@this-week",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: [
+                    "@today",
+                    "@yesterday",
+                    "@tomorrow",
+                    "@this-week",
+                    "@next-week",
+                    "@this-month",
+                    "@next-month"
+                ]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const week = new Date(today.setDate(today.getDate() - today.getDay()));
+            const nextWeek = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gte:${week.getTime() / 1000}`,
+                    `created:lt:${nextWeek.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should be able to build a filter string to filter by keyword @next-week", () => {
+            const options = {
+                filter: "@next-week",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: [
+                    "@today",
+                    "@yesterday",
+                    "@tomorrow",
+                    "@this-week",
+                    "@next-week",
+                    "@this-month",
+                    "@next-month"
+                ]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const nextWeek = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+            const nextNextWeek = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gte:${nextWeek.getTime() / 1000}`,
+                    `created:lt:${nextNextWeek.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should be able to build a filter string to filter by keyword @this-month", () => {
+            const options = {
+                filter: "@this-month",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: [
+                    "@today",
+                    "@yesterday",
+                    "@tomorrow",
+                    "@this-week",
+                    "@next-week",
+                    "@this-month",
+                    "@next-month"
+                ]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const month = today.getMonth();
+            const startOfMonth = new Date(today.setDate(1));
+            const nextMonth = new Date(new Date(today.setMonth(month + 1)).setDate(1));
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gte:${startOfMonth.getTime() / 1000}`,
+                    `created:lt:${nextMonth.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should be able to build a filter string to filter by keyword @next-month", () => {
+            const options = {
+                filter: "@next-month",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: [
+                    "@today",
+                    "@yesterday",
+                    "@tomorrow",
+                    "@this-week",
+                    "@next-week",
+                    "@this-month",
+                    "@next-month"
+                ]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const month = today.getMonth();
+            const nextMonth = new Date(new Date(today.setMonth(month + 1)).setDate(1));
+            const nextNextMonth = new Date(new Date(today.setMonth(month + 2)).setDate(1));
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gte:${nextMonth.getTime() / 1000}`,
+                    `created:lt:${nextNextMonth.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
         it("should be able to build a filter string to filter by custom keyword @something", () => {
             const options = {
                 filter: "@something",
