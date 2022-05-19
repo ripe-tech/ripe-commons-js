@@ -1,7 +1,7 @@
 const assert = require("assert");
 const ripeCommons = require("../..");
 
-describe("Handlers", function() {
+describe("Express Handlers", function() {
     this.timeout(30000);
 
     describe("#errorHandlerExpress()", function() {
@@ -142,7 +142,7 @@ describe("Handlers", function() {
         });
     });
 
-    describe("#notFoundHandlerExpress", function() {
+    describe("#notFoundHandlerExpress()", function() {
         it("should return 404 an 'Route not found' error", () => {
             let errorResult = {};
             const res = {
