@@ -18,6 +18,5 @@ describe("Auth", function() {
                 key: "value"
             });
         });
-
     });
 });
