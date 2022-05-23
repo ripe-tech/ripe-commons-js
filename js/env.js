@@ -10,7 +10,7 @@ export const getRipeCoreOptions = (environment, fallback = {}) => {
         case "now-branch":
             return {
                 url: "https://ripe-core-now.platforme.com/api/",
-                webUrl: "https://ripe-core-now.platforme.com/",
+                webUrl: "https://ripe-core-now.platforme.com/"
             };
         case "sandbox":
             return {
@@ -25,7 +25,7 @@ export const getRipeCoreOptions = (environment, fallback = {}) => {
         case "production":
             return {
                 url: "https://api.platforme.com/api/",
-                webUrl: "https://api.platforme.com/",
+                webUrl: "https://api.platforme.com/"
             };
         default:
             return fallback;
@@ -57,6 +57,6 @@ export const getRipePulseOptions = (environment, fallback = {}) => {
                 url: "https://pulse.platforme.com/"
             };
         default:
-            return fallback
+            return fallback;
     }
 };
