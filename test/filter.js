@@ -411,5 +411,148 @@ describe("Filter", function() {
                 filter_operator: "$and"
             });
         });
+
+        it("should be able to build a filter string to filter by greater than keyword @today", () => {
+            const options = {
+                filter: "@today",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "gt"
+            };
+            const keywordFields = {
+                created: ["@today"]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:gt:${tomorrow.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should be able to build a filter string to filter by lesser than keyword @today", () => {
+            const options = {
+                filter: "@today",
+                limit: 5,
+                start: 0
+            };
+            const nameAlias = {
+                date: "created"
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "lt"
+            };
+            const keywordFields = {
+                created: ["@today"]
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                nameAlias,
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
+
+            const today = new Date(new Date().setHours(0, 0, 0, 0));
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `created:lt:${today.getTime() / 1000}`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should not be able to build a filter array if the no valid operator was given", () => {
+            const options = {
+                filter: "id=2",
+                limit: 5,
+                start: 0
+            };
+            const result = ripeCommons.filterToParams(options, {}, {}, {});
+            console.log(result);
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0
+            });
+        });
+
+        it("should build a valid filter using the operator alias and the name function given", () => {
+            const options = {
+                filter: "id>=2",
+                limit: 5,
+                start: 0
+            };
+            const nameFunc = {
+                id: value => value
+            };
+            const result = ripeCommons.filterToParams(options, {}, nameFunc, {});
+            console.log(result);
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0,
+                "filters[]": [
+                    `id:gte:2`
+                ],
+                filter_operator: "$and"
+            });
+        });
+
+        it("should build an empty filter when no parameters are givven", () => {
+            const result = ripeCommons.filterToParams();
+            assert.deepStrictEqual(result, {
+                number_records: undefined,
+                start_record: undefined
+            });
+        });
+
+        it("should not be able to build a filter array for a keyword that the field does not support", () => {
+            const options = {
+                filter: "created=@today",
+                limit: 5,
+                start: 0
+            };
+            const nameFunc = {
+                created: value => new Date(value) / 1000
+            };
+            const filterFields = {
+                created: "eq"
+            };
+            const keywordFields = {
+                created: []
+            };
+            const result = ripeCommons.filterToParams(options, {}, nameFunc, filterFields, keywordFields);
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0
+            });
+        });
     });
 });
