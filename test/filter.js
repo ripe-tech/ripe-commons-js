@@ -444,9 +444,7 @@ describe("Filter", function() {
             assert.deepStrictEqual(result, {
                 number_records: 5,
                 start_record: 0,
-                "filters[]": [
-                    `created:gt:${tomorrow.getTime() / 1000}`
-                ],
+                "filters[]": [`created:gt:${tomorrow.getTime() / 1000}`],
                 filter_operator: "$and"
             });
         });
@@ -483,9 +481,7 @@ describe("Filter", function() {
             assert.deepStrictEqual(result, {
                 number_records: 5,
                 start_record: 0,
-                "filters[]": [
-                    `created:lt:${today.getTime() / 1000}`
-                ],
+                "filters[]": [`created:lt:${today.getTime() / 1000}`],
                 filter_operator: "$and"
             });
         });
@@ -518,9 +514,7 @@ describe("Filter", function() {
             assert.deepStrictEqual(result, {
                 number_records: 5,
                 start_record: 0,
-                "filters[]": [
-                    `id:gte:2`
-                ],
+                "filters[]": ["id:gte:2"],
                 filter_operator: "$and"
             });
         });
@@ -548,7 +542,13 @@ describe("Filter", function() {
             const keywordFields = {
                 created: []
             };
-            const result = ripeCommons.filterToParams(options, {}, nameFunc, filterFields, keywordFields);
+            const result = ripeCommons.filterToParams(
+                options,
+                {},
+                nameFunc,
+                filterFields,
+                keywordFields
+            );
             assert.deepStrictEqual(result, {
                 number_records: 5,
                 start_record: 0
