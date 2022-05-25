@@ -32,25 +32,6 @@ export const getRipeCoreOptions = (environment, fallback = {}) => {
     }
 };
 
-export const getRipeIdOptions = (environment, fallback = {}) => {
-    switch (environment) {
-        case "now-branch":
-            return {
-                clientId: "3b7f6c17f5047b341f1f79a67c153dc0",
-                clientSecret: "752ec9a665655836540b35bc4e5de5bc7166075f7762256f21ee7e967349712c",
-                redirectUrl: `${window.location.protocol}//${window.location.hostname}/oauth`
-            };
-        case "localhost":
-            return {
-                clientId: "3b7f6c17f5047b341f1f79a67c153dc0",
-                clientSecret: "752ec9a665655836540b35bc4e5de5bc7166075f7762256f21ee7e967349712c",
-                redirectUrl: `http://localhost:${window.location.port}/oauth`
-            };
-        default:
-            return fallback;
-    }
-};
-
 export const getRipePulseOptions = (environment, fallback = {}) => {
     switch (environment) {
         case "ci":

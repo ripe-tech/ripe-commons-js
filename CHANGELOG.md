@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Added `getRipeIdOptions`, `getRipeWhiteAdminOptions` and `getRipeWhiteOptions` retrieval functions
+* Added `getRipeWhiteAdminOptions` and `getRipeWhiteOptions` retrieval functions
 
 ## [0.10.1] - 2022-05-23
 
