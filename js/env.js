@@ -60,3 +60,32 @@ export const getRipePulseOptions = (environment, fallback = {}) => {
             return fallback;
     }
 };
+
+export const getRipeWhiteOptions = (environment, fallback = {}) => {
+    switch (environment) {
+        case "ci":
+        case "test":
+            return {
+                baseUrl: "https://ripe-white-ci.platforme.com/"
+            };
+        case "now":
+        case "now-branch":
+            return {
+                baseUrl: "https://ripe-white-now.platforme.com/"
+            };
+        case "sandbox":
+            return {
+                baseUrl: "https://ripe-white-sbx.platforme.com/"
+            };
+        case "stage":
+            return {
+                baseUrl: "https://ripe-white-stage.platforme.com/"
+            };
+        case "production":
+            return {
+                baseUrl: "https://ripe-white.platforme.com/"
+            };
+        default:
+            return fallback;
+    }
+};
