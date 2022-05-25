@@ -32,7 +32,7 @@ export const getRipeCoreOptions = (environment, fallback = {}) => {
     }
 };
 
-export const getRipeIdOptions = (environment, fallback) => {
+export const getRipeIdOptions = (environment, fallback = {}) => {
     switch (environment) {
         case "now-branch":
             return {
@@ -80,7 +80,7 @@ export const getRipePulseOptions = (environment, fallback = {}) => {
     }
 };
 
-export const getRipeWhiteAdminOptions = (environment, fallback) => {
+export const getRipeWhiteAdminOptions = (environment, fallback = {}) => {
     switch (environment) {
         case "ci":
         case "test":
@@ -109,7 +109,7 @@ export const getRipeWhiteAdminOptions = (environment, fallback) => {
     }
 };
 
-export const getRipeWhiteOptions = (environment, fallback) => {
+export const getRipeWhiteOptions = (environment, fallback = {}) => {
     switch (environment) {
         case "ci":
         case "test":
