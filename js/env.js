@@ -86,8 +86,6 @@ export const getRipeWhiteAdminOptions = (environment, fallback = {}) => {
                 baseUrl: "https://white-admin.platforme.com/"
             };
         default:
-            return {
-                baseUrl: process.env.RIPE_WHITE_ADMIN_URL
-            };
+            return fallback;
     }
 };
