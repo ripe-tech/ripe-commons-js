@@ -21,7 +21,7 @@ export const aclFastify =
 
 export const acl = aclFastify;
 
-const aclPlugin = async (app, options) => {
+export const aclPlugin = async (app, options) => {
     app.addHook("onRequest", acl(options));
 };
 
