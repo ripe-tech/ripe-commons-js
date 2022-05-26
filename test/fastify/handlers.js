@@ -62,22 +62,24 @@ describe("Fastify Handlers", function() {
             };
             process.env.NODE_ENV = "production";
 
-            ripeCommons.errorHandlerFastify(
-                {
-                    name: "Error",
-                    code: "2000",
-                    message: "Error",
-                    stack: "Error\nError"
-                },
-                {},
-                res
-            );
-            assert.strictEqual(errorResult.statusCode, 500);
-            assert.strictEqual(errorResult.code, 500);
-            assert.strictEqual(errorResult.error, "Error");
-            assert.strictEqual(errorResult.stack, undefined);
-
-            process.env.NODE_ENV = "development";
+            try {
+                ripeCommons.errorHandlerFastify(
+                    {
+                        name: "Error",
+                        code: "2000",
+                        message: "Error",
+                        stack: "Error\nError"
+                    },
+                    {},
+                    res
+                );
+                assert.strictEqual(errorResult.statusCode, 500);
+                assert.strictEqual(errorResult.code, 500);
+                assert.strictEqual(errorResult.error, "Error");
+                assert.strictEqual(errorResult.stack, undefined);
+            } finally {
+                process.env.NODE_ENV = "development";
+            }
         });
     });
 

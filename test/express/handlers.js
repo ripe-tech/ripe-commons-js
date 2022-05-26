@@ -88,23 +88,25 @@ describe("Express Handlers", function() {
             const next = () => {};
             process.env.NODE_ENV = "production";
 
-            ripeCommons.errorHandlerExpress(
-                {
-                    name: "Error",
-                    code: "400",
-                    message: "Error",
-                    stack: "Error\nError"
-                },
-                {},
-                res,
-                next
-            );
-            assert.strictEqual(errorResult.statusCode, "400");
-            assert.strictEqual(errorResult.code, "400");
-            assert.strictEqual(errorResult.error, "Error");
-            assert.strictEqual(errorResult.stack, undefined);
-
-            process.env.NODE_ENV = "development";
+            try {
+                ripeCommons.errorHandlerExpress(
+                    {
+                        name: "Error",
+                        code: "400",
+                        message: "Error",
+                        stack: "Error\nError"
+                    },
+                    {},
+                    res,
+                    next
+                );
+                assert.strictEqual(errorResult.statusCode, "400");
+                assert.strictEqual(errorResult.code, "400");
+                assert.strictEqual(errorResult.error, "Error");
+                assert.strictEqual(errorResult.stack, undefined);
+            } finally {
+                process.env.NODE_ENV = "development";
+            }
         });
 
         it("should follow to the next if 'headersSent' flag is true", () => {
