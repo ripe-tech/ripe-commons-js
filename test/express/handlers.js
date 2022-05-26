@@ -86,6 +86,7 @@ describe("Express Handlers", function() {
                 }
             };
             const next = () => {};
+            const previous = process.env.NODE_ENV;
             process.env.NODE_ENV = "production";
 
             try {
@@ -105,7 +106,7 @@ describe("Express Handlers", function() {
                 assert.strictEqual(errorResult.error, "Error");
                 assert.strictEqual(errorResult.stack, undefined);
             } finally {
-                process.env.NODE_ENV = "development";
+                process.env.NODE_ENV = previous;
             }
         });
 

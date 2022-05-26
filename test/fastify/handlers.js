@@ -60,6 +60,7 @@ describe("Fastify Handlers", function() {
                     };
                 }
             };
+            const previous = process.env.NODE_ENV;
             process.env.NODE_ENV = "production";
 
             try {
@@ -78,7 +79,7 @@ describe("Fastify Handlers", function() {
                 assert.strictEqual(errorResult.error, "Error");
                 assert.strictEqual(errorResult.stack, undefined);
             } finally {
-                process.env.NODE_ENV = "development";
+                process.env.NODE_ENV = previous;
             }
         });
     });
