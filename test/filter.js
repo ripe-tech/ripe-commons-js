@@ -493,7 +493,6 @@ describe("Filter", function() {
                 start: 0
             };
             const result = ripeCommons.filterToParams(options, {}, {}, {});
-            console.log(result);
             assert.deepStrictEqual(result, {
                 number_records: 5,
                 start_record: 0
@@ -510,7 +509,6 @@ describe("Filter", function() {
                 id: value => value
             };
             const result = ripeCommons.filterToParams(options, {}, nameFunc, {});
-            console.log(result);
             assert.deepStrictEqual(result, {
                 number_records: 5,
                 start_record: 0,
