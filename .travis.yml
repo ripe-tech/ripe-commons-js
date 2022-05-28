@@ -6,16 +6,7 @@ node_js:
   - "14"
   - "15"
   - "16"
+  - "17"
 install:
   - npm install
 script: npm run lint && npm run build && npm test
-before_deploy: npm run build
-deploy:
-  provider: npm
-  email: development@platforme.com
-  skip_cleanup: true
-  api_key:
-    secure: Qq0TKztp02fbLhqv1iDTU1Y7Lj3RPYE0sxcNcLILIDn01S98tIRMj+8RkQLpdq7BeM7K4fNKl8dLUM8eCd2jYnHL3lLmmsEtLOO9E2e4LT8YgveN00SlVEIIjKzOmN78MMaY9FUFrEisQUsOFnY0Z/j8NoOLsRL3AQ/iCYenpNPabtRsYXYkYyrxa1jTpSI6tqSYQ4LgVQ2O7zwz3RuyvKYE36GYXjvHPNIeELG3MI1ErT8+AG+CG+/+QEmOR1jBY6gNZA0I4jqC5OdSft7IWUW1pBjIFP3N3+D/emO+QQigf/YWmVQFoa1q04FWK541u010dDN05rysSWWLuipmh/p3NKv368tgyPEQ2lDLBOWxeYq+Eg0HW9FHOp2IjOqh5FdBe52HPAU+wX0EsFMNgv2VMzaY/ZU1BQHi8FnlnsiGUigXOylhMYj4oXTGarTAsTDhb7opzmK9Rt9Wtoqjba8D6nOtpeEaRAcMOF/0TWSmx8pFNgHV2g09K2PpvcTip8IQyHf3hceHDDhfwYHtdULkoV6vWyNQFFNn9bF/VaYM0EN0yVe/OusDZINHS+bmiGPXCk2Hxp2q9sNsF+LErAFmztI42HvJHCLXpd0l4zqgLl7uA82dKfTSj14Tci7NnWlCn7QBGtqS24nxBu9/OJNbZAAMhNlZEBSHcGl4HHQ=
-  on:
-    tags: true
-    node_js: "10"
