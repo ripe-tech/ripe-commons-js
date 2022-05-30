@@ -3,7 +3,7 @@ const ripeCommons = require("..");
 
 describe("Env", () => {
     describe("#getRipeWhiteOptions()", function() {
-        it("should return ci options for 'test' and 'ci' environments", () => {
+        it("should return ci option for 'test' and 'ci' environments", () => {
             const ciEnvOptions = ripeCommons.getRipeWhiteOptions("ci");
             const testEnvOptions = ripeCommons.getRipeWhiteOptions("test");
             assert.deepStrictEqual(ciEnvOptions, {
@@ -14,7 +14,7 @@ describe("Env", () => {
             });
         });
 
-        it("should return sbx options for 'now' and 'now-branch' environment", function() {
+        it("should return sbx option for 'now' and 'now-branch' environment", function() {
             const nowEnvOptions = ripeCommons.getRipeWhiteOptions("now");
             const nowBrunchEnvOptions = ripeCommons.getRipeWhiteOptions("now-branch");
             assert.deepStrictEqual(nowEnvOptions, {
@@ -25,21 +25,21 @@ describe("Env", () => {
             });
         });
 
-        it("should return sbx options for 'sandbox' environment", function() {
+        it("should return sbx option for 'sandbox' environment", function() {
             const sandboxEnvOptions = ripeCommons.getRipeWhiteOptions("sandbox");
             assert.deepStrictEqual(sandboxEnvOptions, {
                 baseUrl: "https://ripe-white-sbx.platforme.com/"
             });
         });
 
-        it("should return stage options for 'stage' environment", function() {
+        it("should return stage option for 'stage' environment", function() {
             const stageEnvOptions = ripeCommons.getRipeWhiteOptions("stage");
             assert.deepStrictEqual(stageEnvOptions, {
                 baseUrl: "https://ripe-white-stage.platforme.com/"
             });
         });
 
-        it("should return production options for 'production' environment", function() {
+        it("should return production option for 'production' environment", function() {
             const productionEnvOptions = ripeCommons.getRipeWhiteOptions("production");
             assert.deepStrictEqual(productionEnvOptions, {
                 baseUrl: "https://ripe-white.platforme.com/"
