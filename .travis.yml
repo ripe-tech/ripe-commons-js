@@ -10,3 +10,5 @@ node_js:
 install:
   - npm install
 script: npm run lint && npm run build && npm test
+cache:
+  npm: false
