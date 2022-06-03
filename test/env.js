@@ -2,9 +2,9 @@ const assert = require("assert");
 
 const ripeCommons = require("..");
 
-describe("Env", () => {
+describe("Env", function() {
     describe("#getRipeWhiteOptions()", function() {
-        it("should return ci option for 'test' and 'ci' environments", () => {
+        it("should return ci option for 'test' and 'ci' environments", function() {
             const ciEnvOptions = ripeCommons.getRipeWhiteOptions("ci");
             const testEnvOptions = ripeCommons.getRipeWhiteOptions("test");
             assert.deepStrictEqual(ciEnvOptions, {
