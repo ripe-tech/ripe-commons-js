@@ -83,7 +83,7 @@ export const getRipeWhiteOptions = (environment, fallback = {}) => {
             };
         case "production":
             return {
-                baseUrl: "https://ripe-white.platforme.com/"
+                baseUrl: "https://white.platforme.com/"
             };
         default:
             return fallback;

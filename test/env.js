@@ -43,13 +43,19 @@ describe("Env", function() {
         it("should return production option for 'production' environment", function() {
             const productionEnvOptions = ripeCommons.getRipeWhiteOptions("production");
             assert.deepStrictEqual(productionEnvOptions, {
-                baseUrl: "https://ripe-white.platforme.com/"
+                baseUrl: "https://white.platforme.com/"
             });
         });
 
         it("should return fallback options when environment different than 'ci', 'test', 'stage' and 'production' ", function() {
             const productionEnvOptions = ripeCommons.getRipeWhiteOptions("uat");
             assert.deepStrictEqual(productionEnvOptions, {});
+        });
+
+        it("should return the given fallback options when environment different than 'ci', 'test', 'stage' and 'production' ", function() {
+            const fallback = { url: "https://test.platforme.com/" };
+            const fallbackEnvOptions = ripeCommons.getRipeWhiteOptions("uat", fallback);
+            assert.deepStrictEqual(fallbackEnvOptions, fallback);
         });
     });
 });
