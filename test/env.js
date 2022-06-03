@@ -1,4 +1,5 @@
 const assert = require("assert");
+
 const ripeCommons = require("..");
 
 describe("Env", () => {
