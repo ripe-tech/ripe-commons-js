@@ -8,6 +8,7 @@ export * from "./env";
 export * from "./express";
 export * from "./filter";
 export * from "./money";
+export * from "./semaphore";
 export * from "./string";
 export * from "./fastify";
 export * from "./time";
