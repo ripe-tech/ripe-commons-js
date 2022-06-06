@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.11.0] - 2022-06-06
+
+### Added
+
 * Add semaphore util - [peri-invoicing/#17](https://github.com/ripe-tech/peri-invoicing/issues/17)
 
 ### Changed
