@@ -2,7 +2,7 @@ const assert = require("assert");
 
 const ripeCommons = require("..");
 
-describe("Env", () => {
+describe("Env", function() {
     describe("#getRipeWhiteAdminOptions()", function() {
         it("should return ci options for 'test' and 'ci' environments", function() {
             const ciEnvOptions = ripeCommons.getRipeWhiteAdminOptions("ci");
