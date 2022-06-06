@@ -16,11 +16,11 @@ describe("Env", () => {
 
         it("should return sbx options for 'now' and 'now-branch' environment", function() {
             const nowEnvOptions = ripeCommons.getRipeWhiteAdminOptions("now");
-            const nowBrunchEnvOptions = ripeCommons.getRipeWhiteAdminOptions("now-branch");
+            const nowBranchEnvOptions = ripeCommons.getRipeWhiteAdminOptions("now-branch");
             assert.deepStrictEqual(nowEnvOptions, {
                 baseUrl: "https://ripe-white-admin-sbx.platforme.com/"
             });
-            assert.deepStrictEqual(nowBrunchEnvOptions, {
+            assert.deepStrictEqual(nowBranchEnvOptions, {
                 baseUrl: "https://ripe-white-admin-sbx.platforme.com/"
             });
         });
