@@ -1,11 +1,11 @@
 const assert = require("assert");
 const ripeCommons = require("../..");
 
-describe("Handlers", function() {
+describe("Fastify Handlers", function() {
     this.timeout(30000);
 
     describe("#errorHandlerFastify()", function() {
-        it("should be able to update the error with the given status code and error message", async () => {
+        it("should be able to update the error with the given status code and error message", () => {
             let errorResult = {};
             const res = {
                 code: statusNumber => {
@@ -48,7 +48,7 @@ describe("Handlers", function() {
             assert.deepStrictEqual(errorResult.stack, []);
         });
 
-        it("should not populate the stack trace field in production environment", async () => {
+        it("should not populate the stack trace field in production environment", () => {
             let errorResult = {};
             const res = {
                 code: statusNumber => {
@@ -60,22 +60,48 @@ describe("Handlers", function() {
                     };
                 }
             };
+            const previous = process.env.NODE_ENV;
             process.env.NODE_ENV = "production";
 
-            ripeCommons.errorHandlerFastify(
-                {
-                    name: "Error",
-                    code: "2000",
-                    message: "Error",
-                    stack: "Error\nError"
-                },
-                {},
-                res
-            );
-            assert.strictEqual(errorResult.statusCode, 500);
-            assert.strictEqual(errorResult.code, 500);
-            assert.strictEqual(errorResult.error, "Error");
-            assert.strictEqual(errorResult.stack, undefined);
+            try {
+                ripeCommons.errorHandlerFastify(
+                    {
+                        name: "Error",
+                        code: "2000",
+                        message: "Error",
+                        stack: "Error\nError"
+                    },
+                    {},
+                    res
+                );
+                assert.strictEqual(errorResult.statusCode, 500);
+                assert.strictEqual(errorResult.code, 500);
+                assert.strictEqual(errorResult.error, "Error");
+                assert.strictEqual(errorResult.stack, undefined);
+            } finally {
+                process.env.NODE_ENV = previous;
+            }
+        });
+    });
+
+    describe("#notFoundHandlerFastify()", function() {
+        it("should return 404 an 'Route not found' error", () => {
+            let errorResult = {};
+            const res = {
+                code: statusNumber => {
+                    errorResult = { statusCode: statusNumber };
+                    return {
+                        send: payload => {
+                            errorResult = { ...errorResult, ...payload };
+                        }
+                    };
+                }
+            };
+
+            ripeCommons.notFoundHandlerFastify({}, res);
+            assert.strictEqual(errorResult.statusCode, 404);
+            assert.strictEqual(errorResult.code, 404);
+            assert.strictEqual(errorResult.error, "Route not found");
         });
     });
 });
