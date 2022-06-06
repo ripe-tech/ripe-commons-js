@@ -10,14 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Add `getRipeWhiteAdminOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
+* Add semaphore util - [peri-invoicing/#17](https://github.com/ripe-tech/peri-invoicing/issues/17)
 
 ### Changed
 
-*
+* Bump dependencies versions
 
 ### Fixed
 
-*
+* Fix eslint dependencies problems
 
 ## [0.10.1] - 2022-05-23
 
