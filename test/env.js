@@ -53,9 +53,10 @@ describe("Env", function() {
         });
 
         it("should return the given fallback options when environment different than 'ci', 'test', 'stage' and 'production' ", function() {
-            const fallback = { url: "https://test.platforme.com/" };
-            const fallbackEnvOptions = ripeCommons.getRipeWhiteAdminOptions("uat", fallback);
-            assert.deepStrictEqual(fallbackEnvOptions, fallback);
+            const fallbackEnvOptions = ripeCommons.getRipeWhiteAdminOptions("uat", {
+                url: "https://test.platforme.com/"
+            });
+            assert.deepStrictEqual(fallbackEnvOptions, { url: "https://test.platforme.com/" });
         });
     });
 });
