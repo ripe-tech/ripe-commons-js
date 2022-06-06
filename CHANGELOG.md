@@ -10,6 +10,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Add `getRipeWhiteOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.11.0] - 2022-06-06
+
+### Added
+
 * Add semaphore util - [peri-invoicing/#17](https://github.com/ripe-tech/peri-invoicing/issues/17)
 
 ### Changed
