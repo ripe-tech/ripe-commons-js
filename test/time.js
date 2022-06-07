@@ -8,6 +8,13 @@ describe("Time", function() {
             assert.deepStrictEqual(result, "12/10/2020");
         });
 
+        it("should format simple date strings and reverse the output", () => {
+            const result = ripeCommons.dateString(new Date("10/12/2020") / 1000, "-", {
+                reverse: true
+            });
+            assert.deepStrictEqual(result, "2020-10-12");
+        });
+
         it("should format current date values", () => {
             const result = ripeCommons.dateString();
             assert.deepStrictEqual(typeof result, "string");
@@ -18,6 +25,13 @@ describe("Time", function() {
         it("should format simple date strings", () => {
             const result = ripeCommons.dateStringUTC(new Date("10/12/2020Z") / 1000);
             assert.deepStrictEqual(result, "12/10/2020");
+        });
+
+        it("should format simple date strings and reverse the output", () => {
+            const result = ripeCommons.dateStringUTC(new Date("10/12/2020") / 1000, "-", {
+                reverse: true
+            });
+            assert.deepStrictEqual(result, "2020-10-12");
         });
 
         it("should format current date values", () => {
@@ -54,6 +68,17 @@ describe("Time", function() {
         it("should format simple date time strings", () => {
             const result = ripeCommons.dateTimeString(new Date("10/12/2020") / 1000);
             assert.deepStrictEqual(result, "12/10/2020_00:00:00");
+        });
+
+        it("should format simple date time strings and reverse the date string", () => {
+            const result = ripeCommons.dateTimeString(
+                new Date("10/12/2020") / 1000,
+                " ",
+                "/",
+                ":",
+                { reverse: true }
+            );
+            assert.deepStrictEqual(result, "2020/10/12 00:00:00");
         });
 
         it("should format current date time values", () => {
