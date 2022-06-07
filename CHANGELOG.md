@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `getRipeWhiteAdminOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
 * Add `getRipeWhiteOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
 * Add testing to env methods
+* Add option to reverse the `dateString` - [ripe-util-vue](https://github.com/ripe-tech/ripe-util-vue/issues/259)
 
 ### Changed
 
