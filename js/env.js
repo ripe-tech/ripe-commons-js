@@ -89,3 +89,32 @@ export const getRipeWhiteOptions = (environment, fallback = {}) => {
             return fallback;
     }
 };
+
+export const getRipeWhiteAdminOptions = (environment, fallback = {}) => {
+    switch (environment) {
+        case "ci":
+        case "test":
+            return {
+                baseUrl: "https://ripe-white-admin-ci.platforme.com/"
+            };
+        case "now":
+        case "now-branch":
+            return {
+                baseUrl: "https://ripe-white-admin-sbx.platforme.com/"
+            };
+        case "sandbox":
+            return {
+                baseUrl: "https://ripe-white-admin-sbx.platforme.com/"
+            };
+        case "stage":
+            return {
+                baseUrl: "https://ripe-white-admin-stage.platforme.com/"
+            };
+        case "production":
+            return {
+                baseUrl: "https://white-admin.platforme.com/"
+            };
+        default:
+            return fallback;
+    }
+};
