@@ -1,10 +1,10 @@
 export const dateString = (
     timestamp = null,
     separator = "/",
-    { year = true, month = true, day = true } = {}
+    { year = true, month = true, day = true, reverseDate = false } = {}
 ) => {
     timestamp = timestamp === null ? new Date() / 1000 : timestamp;
-    const buffer = [];
+    let buffer = [];
     const date = new Date(timestamp * 1000);
     const dayV = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
     let monthV = date.getMonth() + 1;
@@ -13,16 +13,17 @@ export const dateString = (
     if (day) buffer.push(dayV);
     if (month) buffer.push(monthV);
     if (year) buffer.push(yearV);
+    if (reverseDate) buffer = buffer.reverse();
     return buffer.join(separator);
 };
 
 export const dateStringUTC = (
     timestamp = null,
     separator = "/",
-    { year = true, month = true, day = true } = {}
+    { year = true, month = true, day = true, reverseDate = false } = {}
 ) => {
     timestamp = timestamp === null ? new Date() / 1000 : timestamp;
-    const buffer = [];
+    let buffer = [];
     const date = new Date(timestamp * 1000);
     const dayV = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
     let monthV = date.getUTCMonth() + 1;
@@ -31,6 +32,7 @@ export const dateStringUTC = (
     if (day) buffer.push(dayV);
     if (month) buffer.push(monthV);
     if (year) buffer.push(yearV);
+    if (reverseDate) buffer = buffer.reverse();
     return buffer.join(separator);
 };
 
@@ -73,9 +75,22 @@ export const dateTimeString = (
     separator = "_",
     dateSeparator = "/",
     timeSeparator = ":",
-    { year = true, month = true, day = true, hours = true, minutes = true, seconds = true } = {}
+    {
+        year = true,
+        month = true,
+        day = true,
+        reverseDate = false,
+        hours = true,
+        minutes = true,
+        seconds = true
+    } = {}
 ) => {
-    const dateS = dateString(timestamp, dateSeparator, { year: year, month: month, day: day });
+    const dateS = dateString(timestamp, dateSeparator, {
+        year: year,
+        month: month,
+        day: day,
+        reverseDate: reverseDate
+    });
     const timeS = timeString(timestamp, timeSeparator, {
         hours: hours,
         minutes: minutes,
