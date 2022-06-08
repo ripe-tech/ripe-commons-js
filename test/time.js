@@ -10,7 +10,7 @@ describe("Time", function() {
 
         it("should format simple date strings and reverse the output", () => {
             const result = ripeCommons.dateString(new Date("10/12/2020") / 1000, "-", {
-                reverse: true
+                reverseDate: true
             });
             assert.deepStrictEqual(result, "2020-10-12");
         });
@@ -29,7 +29,7 @@ describe("Time", function() {
 
         it("should format simple date strings and reverse the output", () => {
             const result = ripeCommons.dateStringUTC(new Date("10/12/2020") / 1000, "-", {
-                reverse: true
+                reverseDate: true
             });
             assert.deepStrictEqual(result, "2020-10-12");
         });
@@ -76,7 +76,7 @@ describe("Time", function() {
                 " ",
                 "/",
                 ":",
-                { reverse: true }
+                { reverseDate: true }
             );
             assert.deepStrictEqual(result, "2020/10/12 00:00:00");
         });
