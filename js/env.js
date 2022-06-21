@@ -124,3 +124,9 @@ export const getRipeConfigPublicOptions = (url = null) => {
         url: url || "https://config-public.platforme.com/"
     };
 };
+
+export const getRipeConfigOptions = (url = null) => {
+    return {
+        url: url || "https://config.platforme.com/"
+    };
+};
