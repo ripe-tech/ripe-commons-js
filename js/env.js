@@ -119,14 +119,14 @@ export const getRipeWhiteAdminOptions = (environment, fallback = {}) => {
     }
 };
 
-export const getRipeConfigPublicOptions = (url = null) => {
-    return {
-        url: url || "https://config-public.platforme.com/"
-    };
-};
-
 export const getRipeConfigOptions = (url = null) => {
     return {
         url: url || "https://config.platforme.com/"
+    };
+};
+
+export const getRipeConfigPublicOptions = (url = null) => {
+    return {
+        url: url || "https://config-public.platforme.com/"
     };
 };
