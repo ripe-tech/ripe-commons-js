@@ -279,6 +279,20 @@ describe("#getRipeConfigOptions()", function() {
             url: "https://config.platforme.com/"
         });
     });
+
+    it("should return fallback options when environment isn't part of the available options", function() {
+        const uatEnvOptions = ripeCommons.getRipeCoreOptions("uat");
+        assert.deepStrictEqual(uatEnvOptions, {});
+    });
+
+    it("should return the given fallback options when environment isn't part of the available options", function() {
+        const fallbackEnvOptions = ripeCommons.getRipeCoreOptions("uat", {
+            url: "https://config.platforme.com/"
+        });
+        assert.deepStrictEqual(fallbackEnvOptions, {
+            url: "https://config.platforme.com/"
+        });
+    });
 });
 
 describe("#getRipeConfigPublicOptions()", function() {
@@ -308,6 +322,20 @@ describe("#getRipeConfigPublicOptions()", function() {
     it("should return production option for 'production' environment", function() {
         const productionEnvOptions = ripeCommons.getRipeConfigPublicOptions("production");
         assert.deepStrictEqual(productionEnvOptions, {
+            url: "https://config-public.platforme.com/"
+        });
+    });
+
+    it("should return fallback options when environment isn't part of the available options", function() {
+        const uatEnvOptions = ripeCommons.getRipeCoreOptions("uat");
+        assert.deepStrictEqual(uatEnvOptions, {});
+    });
+
+    it("should return the given fallback options when environment isn't part of the available options", function() {
+        const fallbackEnvOptions = ripeCommons.getRipeCoreOptions("uat", {
+            url: "https://config-public.platforme.com/"
+        });
+        assert.deepStrictEqual(fallbackEnvOptions, {
             url: "https://config-public.platforme.com/"
         });
     });
