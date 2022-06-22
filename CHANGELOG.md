@@ -9,11 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Add `getRipeWhiteAdminOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
-* Add `getRipeWhiteOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
-* Add testing to env methods
-* Add option to reverse the `dateString` - [ripe-util-vue/#259](https://github.com/ripe-tech/ripe-util-vue/issues/259)
-* Add `getRipeConfigPublicOptions` and `getRipeConfigOptions` method - [ripe-white/#961](https://github.com/ripe-tech/ripe-white/issues/961)
+*
 
 ### Changed
 
@@ -22,6 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.12.0] - 2022-06-22
+
+### Added
+
+* Add `getRipeWhiteAdminOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
+* Add `getRipeWhiteOptions` method - [ripe-util-vue/#267](https://github.com/ripe-tech/ripe-util-vue/issues/267)
+* Add testing to env methods
+* Add option to reverse the `dateString` - [ripe-util-vue/#259](https://github.com/ripe-tech/ripe-util-vue/issues/259)
+* Add `getRipeConfigPublicOptions` and `getRipeConfigOptions` method - [ripe-white/#961](https://github.com/ripe-tech/ripe-white/issues/961)
 
 ## [0.11.0] - 2022-06-06
 
