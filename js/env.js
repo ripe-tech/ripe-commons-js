@@ -118,3 +118,43 @@ export const getRipeWhiteAdminOptions = (environment, fallback = {}) => {
             return fallback;
     }
 };
+
+export const getRipeConfigOptions = (environment, fallback = {}) => {
+    switch (environment) {
+        case "ci":
+        case "test":
+        case "now":
+        case "now-branch":
+        case "sandbox":
+        case "stage":
+            return {
+                url: "https://master--ripe-config.netlify.app/"
+            };
+        case "production":
+            return {
+                url: "https://config.platforme.com/"
+            };
+        default:
+            return fallback;
+    }
+};
+
+export const getRipeConfigPublicOptions = (environment, fallback = {}) => {
+    switch (environment) {
+        case "ci":
+        case "test":
+        case "now":
+        case "now-branch":
+        case "sandbox":
+        case "stage":
+            return {
+                url: "https://master--ripe-config-public.netlify.app/"
+            };
+        case "production":
+            return {
+                url: "https://config-public.platforme.com/"
+            };
+        default:
+            return fallback;
+    }
+};

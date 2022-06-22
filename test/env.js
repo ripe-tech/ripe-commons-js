@@ -248,3 +248,95 @@ describe("Env", function() {
         });
     });
 });
+
+describe("#getRipeConfigOptions()", function() {
+    it("should return ci option for 'ci', 'test', 'now', 'sandbox', and 'stage' environments", function() {
+        const ciEnvOptions = ripeCommons.getRipeConfigOptions("ci");
+        const testEnvOptions = ripeCommons.getRipeConfigOptions("test");
+        const nowEnvOptions = ripeCommons.getRipeConfigOptions("now");
+        const sandboxEnvOptions = ripeCommons.getRipeConfigOptions("sandbox");
+        const stageEnvOptions = ripeCommons.getRipeConfigOptions("stage");
+        assert.deepStrictEqual(ciEnvOptions, {
+            url: "https://master--ripe-config.netlify.app/"
+        });
+        assert.deepStrictEqual(testEnvOptions, {
+            url: "https://master--ripe-config.netlify.app/"
+        });
+        assert.deepStrictEqual(nowEnvOptions, {
+            url: "https://master--ripe-config.netlify.app/"
+        });
+        assert.deepStrictEqual(sandboxEnvOptions, {
+            url: "https://master--ripe-config.netlify.app/"
+        });
+        assert.deepStrictEqual(stageEnvOptions, {
+            url: "https://master--ripe-config.netlify.app/"
+        });
+    });
+
+    it("should return production option for 'production' environment", function() {
+        const productionEnvOptions = ripeCommons.getRipeConfigOptions("production");
+        assert.deepStrictEqual(productionEnvOptions, {
+            url: "https://config.platforme.com/"
+        });
+    });
+
+    it("should return fallback options when environment isn't part of the available options", function() {
+        const uatEnvOptions = ripeCommons.getRipeCoreOptions("uat");
+        assert.deepStrictEqual(uatEnvOptions, {});
+    });
+
+    it("should return the given fallback options when environment isn't part of the available options", function() {
+        const fallbackEnvOptions = ripeCommons.getRipeCoreOptions("uat", {
+            url: "https://config.platforme.com/"
+        });
+        assert.deepStrictEqual(fallbackEnvOptions, {
+            url: "https://config.platforme.com/"
+        });
+    });
+});
+
+describe("#getRipeConfigPublicOptions()", function() {
+    it("should return production option for 'ci', 'test', 'now', 'sandbox', and 'stage' environments", function() {
+        const ciEnvOptions = ripeCommons.getRipeConfigPublicOptions("ci");
+        const testEnvOptions = ripeCommons.getRipeConfigPublicOptions("test");
+        const nowEnvOptions = ripeCommons.getRipeConfigPublicOptions("now");
+        const sandboxEnvOptions = ripeCommons.getRipeConfigPublicOptions("sandbox");
+        const stageEnvOptions = ripeCommons.getRipeConfigPublicOptions("stage");
+        assert.deepStrictEqual(ciEnvOptions, {
+            url: "https://master--ripe-config-public.netlify.app/"
+        });
+        assert.deepStrictEqual(testEnvOptions, {
+            url: "https://master--ripe-config-public.netlify.app/"
+        });
+        assert.deepStrictEqual(nowEnvOptions, {
+            url: "https://master--ripe-config-public.netlify.app/"
+        });
+        assert.deepStrictEqual(sandboxEnvOptions, {
+            url: "https://master--ripe-config-public.netlify.app/"
+        });
+        assert.deepStrictEqual(stageEnvOptions, {
+            url: "https://master--ripe-config-public.netlify.app/"
+        });
+    });
+
+    it("should return production option for 'production' environment", function() {
+        const productionEnvOptions = ripeCommons.getRipeConfigPublicOptions("production");
+        assert.deepStrictEqual(productionEnvOptions, {
+            url: "https://config-public.platforme.com/"
+        });
+    });
+
+    it("should return fallback options when environment isn't part of the available options", function() {
+        const uatEnvOptions = ripeCommons.getRipeCoreOptions("uat");
+        assert.deepStrictEqual(uatEnvOptions, {});
+    });
+
+    it("should return the given fallback options when environment isn't part of the available options", function() {
+        const fallbackEnvOptions = ripeCommons.getRipeCoreOptions("uat", {
+            url: "https://config-public.platforme.com/"
+        });
+        assert.deepStrictEqual(fallbackEnvOptions, {
+            url: "https://config-public.platforme.com/"
+        });
+    });
+});
