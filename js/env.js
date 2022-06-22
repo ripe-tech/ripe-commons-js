@@ -128,7 +128,7 @@ export const getRipeConfigOptions = (environment, fallback = {}) => {
         case "sandbox":
         case "stage":
             return {
-                baseUrl: "https://master--ripe-config.netlify.app"
+                baseUrl: "https://master--ripe-config.netlify.app/"
             };
         case "production":
             return {
@@ -148,7 +148,7 @@ export const getRipeConfigPublicOptions = (environment, fallback = {}) => {
         case "sandbox":
         case "stage":
             return {
-                baseUrl: "https://master--ripe-config-public.netlify.app"
+                baseUrl: "https://master--ripe-config-public.netlify.app/"
             };
         case "production":
             return {
