@@ -44,7 +44,7 @@ export const timeString = (
     timestamp = timestamp === null ? new Date() / 1000 : timestamp;
     const buffer = [];
     const date = new Date(timestamp * 1000);
-    const hoursV = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+    const hoursV = date.getHours() < 10 ? `0${date.getHours() - 1}` : date.getHours() - 1;
     const minutesV = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
     const secondsV = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
     if (hours) buffer.push(hoursV);

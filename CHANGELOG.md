@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *
 
+## [0.12.1] - 2022-09-12
+
+### Fixed
+
+* Time hour support
+
 ## [0.12.0] - 2022-06-22
 
 ### Added
