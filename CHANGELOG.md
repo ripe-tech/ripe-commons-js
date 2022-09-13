@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-*
+* Reversed erroneous issue fix in `timeString()` method
 
 ## [0.12.1] - 2022-09-12
 
