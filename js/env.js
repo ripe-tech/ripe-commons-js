@@ -12,6 +12,7 @@ export const getRipeCoreOptions = (environment, fallback = {}) => {
                 url: "https://ripe-core-now.platforme.com/api/",
                 webUrl: "https://ripe-core-now.platforme.com/"
             };
+        case "localhost":
         case "sandbox":
             return {
                 url: "https://ripe-core-sbx.platforme.com/api/",
@@ -44,6 +45,7 @@ export const getRipePulseOptions = (environment, fallback = {}) => {
             return {
                 url: "https://ripe-pulse-now.platforme.com/"
             };
+        case "localhost":
         case "sandbox":
             return {
                 url: "https://ripe-pulse-sbx.platforme.com/"
@@ -73,6 +75,7 @@ export const getRipeWhiteOptions = (environment, fallback = {}) => {
             return {
                 baseUrl: "https://ripe-white-now.platforme.com/"
             };
+        case "localhost":
         case "sandbox":
             return {
                 baseUrl: "https://ripe-white-sbx.platforme.com/"
@@ -102,6 +105,7 @@ export const getRipeWhiteAdminOptions = (environment, fallback = {}) => {
             return {
                 baseUrl: "https://ripe-white-admin-sbx.platforme.com/"
             };
+        case "localhost":
         case "sandbox":
             return {
                 baseUrl: "https://ripe-white-admin-sbx.platforme.com/"
@@ -123,6 +127,7 @@ export const getRipeConfigOptions = (environment, fallback = {}) => {
     switch (environment) {
         case "ci":
         case "test":
+        case "localhost":
         case "now":
         case "now-branch":
         case "sandbox":
@@ -145,6 +150,7 @@ export const getRipeConfigPublicOptions = (environment, fallback = {}) => {
         case "test":
         case "now":
         case "now-branch":
+        case "localhost":
         case "sandbox":
         case "stage":
             return {
