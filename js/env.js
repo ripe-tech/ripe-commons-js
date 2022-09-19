@@ -75,6 +75,7 @@ export const getRipeWhiteOptions = (environment, fallback = {}) => {
             return {
                 baseUrl: "https://ripe-white-now.platforme.com/"
             };
+        case "localhost":
         case "sandbox":
             return {
                 baseUrl: "https://ripe-white-sbx.platforme.com/"
