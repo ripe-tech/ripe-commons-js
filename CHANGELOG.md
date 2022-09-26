@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Handling `localhost` enviroment options
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.12.3] - 2022-09-26
+
+### Added
+
+* Handling `localhost` enviroment options
 
 ## [0.12.2] - 2022-09-12
 
