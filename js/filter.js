@@ -1,12 +1,13 @@
 import { flatMap } from "./util";
 
-const OP_REGEX = /(?:(?:<=)|(?:<)|(?:>=)|(?:>)|(?:=))/;
+const OP_REGEX = /(?:(?:<=)|(?:<)|(?:\[\])|(?:>=)|(?:>)|(?:=))/;
 
 const OP_ALIAS = {
     ">": "gt",
     ">=": "gte",
     "<": "lt",
-    "<=": "lte"
+    "<=": "lte",
+    "[]": "in"
 };
 
 export const FILTER_KEYWORDS = {
