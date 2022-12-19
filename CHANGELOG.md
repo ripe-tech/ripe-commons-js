@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Add alias for operator `in` - [ripe-pulse/#240](https://github.com/ripe-tech/ripe-pulse/issues/240)
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.12.4] - 2022-12-19
+
+### Added
+
+* Add alias for operator `in` - [ripe-pulse/#240](https://github.com/ripe-tech/ripe-pulse/issues/240)
 
 ## [0.12.3] - 2022-09-26
 
