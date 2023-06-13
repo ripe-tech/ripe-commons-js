@@ -1,6 +1,11 @@
-| - | - |
-| --- | --- |
-| Issue | https://github.com/ripe-tech/products/issues/XXX |
-| Dependencies | |
-| Decisions | |
-| Animated GIF | |
+### Issue
+- https://github.com/ripe-tech/ripe-commons-js/issues/xxx
+
+### Dependencies
+- None
+
+### Decisions
+- None
+
+### Screenshots
+- None
