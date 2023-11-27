@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* `removeFunc` to specify which fields to remove (not filter for) based on functions - [ripe-pulse/#436](https://github.com/ripe-tech/ripe-pulse/issues/436)
 
 ### Changed
 
