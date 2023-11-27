@@ -28,7 +28,7 @@ describe("Time", function() {
         });
 
         it("should format simple date strings and reverse the output", () => {
-            const result = ripeCommons.dateStringUTC(new Date("10/12/2020") / 1000, "-", {
+            const result = ripeCommons.dateStringUTC(new Date("10/12/2020Z") / 1000, "-", {
                 reverseDate: true
             });
             assert.deepStrictEqual(result, "2020-10-12");
