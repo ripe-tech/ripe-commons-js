@@ -1,8 +1,8 @@
 const assert = require("assert");
 const ripeCommons = require("..");
 
-describe("Filter", function() {
-    describe("#filterToParams()", function() {
+describe("Filter", function () {
+    describe("#filterToParams()", function () {
         it("should be able to build a filter string to filter only for id equal to 2", () => {
             const options = {
                 filter: "id=2",
@@ -546,6 +546,89 @@ describe("Filter", function() {
                 nameFunc,
                 filterFields,
                 keywordFields
+            );
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0
+            });
+        });
+
+        it("should not leave out filter fields when applicable to the searched value", () => {
+            const options = {
+                filter: "friends=13",
+                limit: 5,
+                start: 0
+            };
+            const filterFields = {
+                friends: "in"
+            };
+            const removeFunc = {
+                friends: value => isNaN(parseInt(value))
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                {},
+                {},
+                filterFields,
+                {},
+                {},
+                removeFunc
+            );
+            assert.deepStrictEqual(result, {
+                filter_operator: "$and",
+                "filters[]": ["friends:in:13"],
+                number_records: 5,
+                start_record: 0
+            });
+        });
+
+        it("should leave out filter fields not applicable to the searched value", () => {
+            const options = {
+                filter: "friends=john",
+                limit: 5,
+                start: 0
+            };
+            const filterFields = {
+                friends: "in"
+            };
+            const removeFunc = {
+                friends: value => isNaN(parseInt(value))
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                {},
+                {},
+                filterFields,
+                {},
+                {},
+                removeFunc
+            );
+            assert.deepStrictEqual(result, {
+                number_records: 5,
+                start_record: 0
+            });
+        });
+
+        it("should leave out imperfect filter strings not applicable to the searched value", () => {
+            const options = {
+                filter: "john",
+                limit: 5,
+                start: 0
+            };
+            const filterFields = {
+                friends: "in"
+            };
+            const removeFunc = {
+                friends: value => isNaN(parseInt(value))
+            };
+            const result = ripeCommons.filterToParams(
+                options,
+                {},
+                {},
+                filterFields,
+                {},
+                {},
+                removeFunc
             );
             assert.deepStrictEqual(result, {
                 number_records: 5,
