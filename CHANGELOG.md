@@ -13,11 +13,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Remove Travis CI - [products/#97](https://github.com/ripe-tech/products/issues/97)
+*
 
 ### Fixed
 
 *
+
+## [0.13.0] - 2023-11-27
+
+### Added
+
+* `removeFunc` to specify which fields to remove (not filter for) based on functions - [ripe-pulse/#436](https://github.com/ripe-tech/ripe-pulse/issues/436)
+
+### Changed
+
+* Remove Travis CI - [products/#97](https://github.com/ripe-tech/products/issues/97)
 
 ## [0.12.4] - 2022-12-19
 

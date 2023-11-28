@@ -63,7 +63,8 @@ export const filterToParams = (
     nameFunc = {},
     filterFields = {},
     keywordFields = {},
-    { imperfectFilterFields = null, keywords = FILTER_KEYWORDS } = {}
+    { imperfectFilterFields = null, keywords = FILTER_KEYWORDS } = {},
+    removeFunc = {}
 ) => {
     let operator = "$or";
     const { sort, reverse, filter, start, limit } = options;
@@ -85,7 +86,10 @@ export const filterToParams = (
             const fieldFunc = nameFunc[field];
             value = keywords[value] || !fieldFunc ? value : fieldFunc(value);
             arithOp = arithOp === "=" ? filterFields[field] : OP_ALIAS[arithOp];
-            if (!field || !arithOp) continue;
+
+            const remove = removeFunc[field] ? removeFunc[field](value) : false;
+            if (remove || !field || !arithOp) continue;
+
             filters.push(
                 ..._buildFilter(field, arithOp, value, keywordFields, { keywords: keywords })
             );
@@ -107,17 +111,22 @@ export const filterToParams = (
             ...flatMap(
                 ([field, operator]) =>
                     _buildFilter(field, operator, filterS, keywordFields, { keywords: keywords }),
-                Object.entries(imperfectFilterFields)
+                Object.entries(imperfectFilterFields).filter(
+                    ([field, _]) => !removeFunc[field] || !removeFunc[field](filterS)
+                )
             )
         );
     }
+
     if (sort) {
         params.sort = sortS;
     }
+
     if (filterS && filters.length > 0) {
         params["filters[]"] = filters;
         params.filter_operator = operator;
     }
+
     return params;
 };
 
